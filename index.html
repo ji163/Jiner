@@ -1,0 +1,2788 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>蒋新悦 · 个人简历</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+    }
+    
+    /* 隐藏原生滚动条滑块，但保留轨道 */
+    ::-webkit-scrollbar {
+      width: 40px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: transparent;
+    }
+    
+    /* 自定义花朵滚动条 */
+    .flower-scrollbar {
+      position: fixed;
+      right: 8px;
+      top: 0;
+      width: 32px;
+      height: 100vh;
+      z-index: 9999;
+      pointer-events: none;
+    }
+    
+    .flower-scroll-track {
+      position: absolute;
+      right: 8px;
+      top: 20px;
+      width: 6px;
+      height: calc(100vh - 40px);
+      background: #f8d7da;
+      border-radius: 3px;
+      border: 2px solid #e898aa;
+      pointer-events: auto;
+    }
+    
+    .flower-scroll-thumb {
+      position: absolute;
+      right: -13px;
+      top: 0;
+      width: 32px;
+      height: 32px;
+      cursor: grab;
+      pointer-events: auto;
+      transition: transform 0.1s ease;
+      z-index: 10;
+    }
+    
+    .flower-scroll-thumb:active {
+      cursor: grabbing;
+      transform: scale(1.15);
+    }
+    
+    .flower-scroll-thumb:hover {
+      transform: scale(1.1);
+    }
+    
+    .flower-scroll-thumb.dragging {
+      transform: scale(1.15);
+    }
+    
+    .flower-scroll-thumb svg {
+      animation: flowerWiggle 3s ease-in-out infinite;
+      transform-origin: center bottom;
+    }
+    
+    @keyframes flowerWiggle {
+      0%, 100% { transform: rotate(-5deg); }
+      50% { transform: rotate(5deg); }
+    }
+    
+    .flower-scroll-thumb:hover svg,
+    .flower-scroll-thumb.dragging svg {
+      animation-duration: 0.5s;
+    }
+    
+    body {
+      font-family: 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+      background: #d4c5c9;
+      min-height: 100vh;
+      padding: 30px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      color: #4a3f7a;
+      overflow-y: auto;
+    }
+    
+    /* 主容器 - 大窗口 */
+    .desktop {
+      max-width: 1200px;
+      width: 100%;
+      background: #ffffff;
+      background-image: 
+        linear-gradient(rgba(200, 180, 200, 0.25) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 180, 200, 0.25) 1px, transparent 1px);
+      background-size: 15px 15px;
+      border: 5px solid #5c4b99;
+      border-radius: 30px;
+      position: relative;
+      box-shadow: 
+        20px 20px 0 rgba(92, 75, 153, 0.25),
+        inset 0 0 0 3px #e8a0af;
+      padding: 0;
+      overflow: visible;
+    }
+    
+    /* 大窗口标题栏 */
+    .desktop-titlebar {
+      background: linear-gradient(180deg, #e88ea0 0%, #d87890 100%);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      border-bottom: 4px solid #5c4b99;
+      position: relative;
+    }
+    
+    .traffic-lights {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .traffic-light {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #5c4b99;
+      animation: trafficBlink 3s ease-in-out infinite;
+    }
+    
+    .light-close { background: #ff6b6b; animation-delay: 0s; }
+    .light-min { background: #ffd93d; animation-delay: 1s; }
+    .light-max { background: #6bcb77; animation-delay: 2s; }
+    
+    @keyframes trafficBlink {
+      0%, 90%, 100% { transform: scale(1); filter: brightness(1); }
+      95% { transform: scale(1.1); filter: brightness(1.2); }
+    }
+    
+    .window-content {
+      padding: 30px;
+      position: relative;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 25px;
+    }
+    
+    /* macOS 风格窗口 - 改用相对定位 */
+    .mac-window {
+      background: #ffffff;
+      border: 4px solid #5c4b99;
+      border-radius: 22px;
+      position: relative;
+      box-shadow: 6px 6px 0 rgba(92, 75, 153, 0.3);
+      overflow: hidden;
+      animation: floatWindow 4s ease-in-out infinite;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .mac-window:hover {
+      transform: translateY(-5px) rotate(0deg) !important;
+      box-shadow: 10px 12px 0 rgba(92, 75, 153, 0.35);
+      z-index: 100 !important;
+    }
+    
+    @keyframes floatWindow {
+      0%, 100% { transform: translateY(0px) rotate(var(--rot, 0deg)); }
+      50% { transform: translateY(-6px) rotate(var(--rot, 0deg)); }
+    }
+    
+    .mac-window:nth-child(odd) { animation-delay: -2s; }
+    
+    .mac-window-titlebar {
+      background: linear-gradient(180deg, #f0b0be 0%, #e898aa 100%);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      border-bottom: 3px solid #5c4b99;
+      gap: 8px;
+    }
+    
+    .mac-window-titlebar .traffic-lights {
+      transform: scale(0.75);
+      transform-origin: left center;
+    }
+    
+    .mac-window-title {
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: #3d3070;
+      margin-left: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .mac-window-title .cn-label {
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: #5c4b99;
+      opacity: 0.8;
+    }
+    
+    .window-icon {
+      width: 34px;
+      height: 34px;
+      background: #f0c0cb;
+      border: 3px solid #5c4b99;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      animation: iconBounce 2s ease-in-out infinite;
+    }
+    
+    @keyframes iconBounce {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.1) rotate(5deg); }
+    }
+    
+    .mac-window-body {
+      padding: 18px 20px;
+      background: #fff;
+    }
+    
+    .mac-window-body.pink-bg {
+      background: linear-gradient(135deg, #fce4ec 0%, #f8d0dc 100%);
+    }
+    
+    /* 网格布局区域 */
+    .col-left {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+    
+    .col-right {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+    
+    .full-width {
+      grid-column: 1 / -1;
+    }
+    
+    /* ABOUT ME 窗口 */
+    .about-window {
+      --rot: -1deg;
+    }
+    
+    .avatar-container {
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 16px;
+      position: relative;
+    }
+    
+    .avatar-circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #f8b5c5;
+      border: 5px solid #5c4b99;
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+      animation: avatarPulse 3s ease-in-out infinite;
+    }
+    
+    @keyframes avatarPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(232, 142, 160, 0.4); }
+      50% { box-shadow: 0 0 0 10px rgba(232, 142, 160, 0); }
+    }
+    
+    .avatar-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .avatar-decoration {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+    
+    .avatar-decoration::before {
+      content: '';
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      top: -12px;
+      left: -8px;
+      border: 4px solid #5c4b99;
+      border-radius: 50%;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      z-index: 1;
+      animation: spinDecor 8s linear infinite;
+    }
+    
+    @keyframes spinDecor {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    .close-x {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 26px;
+      height: 26px;
+      font-size: 1.4rem;
+      color: #5c4b99;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .close-x:hover { transform: scale(1.2) rotate(90deg); }
+    
+    .plus-buttons {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      gap: 6px;
+      z-index: 3;
+    }
+    
+    .plus-btn {
+      width: 28px;
+      height: 28px;
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: #5c4b99;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .plus-btn:hover { transform: scale(1.2) rotate(90deg); }
+    
+    .name-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    
+    .name-text {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #3d3070;
+    }
+    
+    .qr-code {
+      width: 60px;
+      height: 60px;
+      border: 3px solid #5c4b99;
+      border-radius: 8px;
+      overflow: hidden;
+      animation: qrPulse 2s ease-in-out infinite;
+      cursor: pointer;
+    }
+    
+    .qr-code img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    @keyframes qrPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    .divider-line {
+      height: 3px;
+      background: #5c4b99;
+      margin: 12px 0;
+      border-radius: 2px;
+    }
+    
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      font-size: 0.9rem;
+      transition: transform 0.2s;
+    }
+    
+    .info-item:hover {
+      transform: translateX(5px);
+    }
+    
+    .info-icon {
+      width: 34px;
+      height: 34px;
+      background: #fce4ec;
+      border: 3px solid #5c4b99;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+    
+    .info-item:hover .info-icon {
+      transform: scale(1.15) rotate(10deg);
+      background: #f8d0dc;
+    }
+    
+    /* AWARDS/CERTIFICATES 窗口 */
+    .awards-window {
+      --rot: 0.8deg;
+    }
+    
+    .awards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    
+    .award-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 10px;
+      font-size: 0.9rem;
+      border-radius: 12px;
+      transition: all 0.2s;
+      background: rgba(255,255,255,0.5);
+    }
+    
+    .award-item:hover {
+      background: rgba(255,255,255,0.9);
+      transform: translateX(5px);
+    }
+    
+    .award-icon {
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-size: 1.2rem;
+      animation: iconWiggle 2s ease-in-out infinite;
+    }
+    
+    @keyframes iconWiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-10deg); }
+      75% { transform: rotate(10deg); }
+    }
+    
+    /* 证书图片展示 */
+    .cert-gallery {
+      margin-top: 15px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    
+    .cert-thumb {
+      border: 3px solid #5c4b99;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 2px 2px 0 rgba(92, 75, 153, 0.3);
+      position: relative;
+    }
+    
+    .cert-thumb:hover {
+      transform: scale(1.05) rotate(-1deg);
+      box-shadow: 4px 4px 0 rgba(92, 75, 153, 0.4);
+      z-index: 10;
+    }
+    
+    .cert-thumb img {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .cert-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(92,75,153,0.9));
+      color: white;
+      font-size: 0.65rem;
+      padding: 12px 6px 4px;
+      font-weight: 600;
+      text-align: center;
+    }
+    
+    /* 证书大图查看器 */
+    .cert-lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    
+    .cert-lightbox.active {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .cert-lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border: 4px solid #f0c0cb;
+      border-radius: 10px;
+      box-shadow: 0 0 30px rgba(240,192,203,0.5);
+    }
+    
+    .cert-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      background: #f0c0cb;
+      border: 3px solid #5c4b99;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    
+    .cert-close:hover {
+      transform: scale(1.1) rotate(90deg);
+    }
+    
+    /* SKILLS 窗口 - 全宽 */
+    .skills-window {
+      --rot: 0.3deg;
+    }
+    
+    .skills-content {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 20px;
+    }
+    
+    .software-list {
+      border-right: 3px solid #5c4b99;
+      padding-right: 15px;
+    }
+    
+    .software-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 12px;
+      transition: all 0.2s;
+      cursor: default;
+    }
+    
+    .software-item:hover {
+      background: #fce4ec;
+      transform: translateX(5px);
+    }
+    
+    .software-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 2px solid #5c4b99;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 900;
+      color: #fff;
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    
+    .software-item:hover .software-icon {
+      transform: scale(1.15) rotate(-5deg);
+    }
+    
+    .skills-bars {
+      padding: 10px 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      justify-content: center;
+      background-image: 
+        linear-gradient(rgba(200, 150, 170, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 150, 170, 0.2) 1px, transparent 1px);
+      background-size: 20px 20px;
+      border-radius: 12px;
+    }
+    
+    .skill-bar-item {
+      opacity: 0;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .skill-bar-item:nth-child(1) { animation-delay: 0.2s; }
+    .skill-bar-item:nth-child(2) { animation-delay: 0.4s; }
+    .skill-bar-item:nth-child(3) { animation-delay: 0.6s; }
+    .skill-bar-item:nth-child(4) { animation-delay: 0.8s; }
+    .skill-bar-item:nth-child(5) { animation-delay: 1s; }
+    .skill-bar-item:nth-child(6) { animation-delay: 1.2s; }
+    
+    .skill-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: #5c4b99;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .skill-track {
+      height: 16px;
+      background: #f0e0e8;
+      border: 2px solid #5c4b99;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .skill-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #e88ea0, #f0b0be, #e88ea0);
+      background-size: 200% 100%;
+      border-radius: 8px;
+      width: 0;
+      animation: fillBar 1.5s ease-out forwards, shimmerBar 2s linear infinite;
+    }
+    
+    @keyframes fillBar {
+      to { width: var(--level); }
+    }
+    
+    @keyframes shimmerBar {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    
+    /* INTERESTS 窗口 */
+    .interests-window {
+      --rot: -0.5deg;
+    }
+    
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px 8px;
+    }
+    
+    .interest-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 6px;
+      cursor: default;
+      transition: transform 0.2s;
+    }
+    
+    .interest-item:hover {
+      transform: scale(1.15) translateY(-5px);
+    }
+    
+    .interest-icon {
+      width: 46px;
+      height: 46px;
+      background: #fff;
+      border: 3px solid #5c4b99;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      transition: all 0.3s;
+    }
+    
+    .interest-item:hover .interest-icon {
+      background: #f8d0dc;
+      transform: rotate(-10deg);
+    }
+    
+    .interest-item:nth-child(odd) .interest-icon { animation-delay: 0.5s; }
+    .interest-item:hover .interest-icon {
+      animation: iconSpin 0.5s ease;
+    }
+    
+    @keyframes iconSpin {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.2); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+    
+    .interest-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    
+    /* S弯马路动画 */
+    .road-animation-container {
+      width: 100%;
+      height: 300px;
+      position: relative;
+      margin: 10px 0;
+      overflow: visible;
+      user-select: none;
+    }
+    
+    .road-svg {
+      width: 100%;
+      height: 180px;
+    }
+    
+    /* 手动拉杆控制 */
+    .slider-container {
+      width: 100%;
+      padding: 15px 20px 5px;
+      position: relative;
+    }
+    
+    .slider-track {
+      width: 100%;
+      height: 12px;
+      background: linear-gradient(180deg, #f0b0be 0%, #e898aa 100%);
+      border-radius: 6px;
+      border: 3px solid #5c4b99;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 rgba(92, 75, 153, 0.3);
+    }
+    
+    .slider-thumb {
+      position: absolute;
+      top: 50%;
+      left: 0%;
+      transform: translate(-50%, -50%);
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(180deg, #ffd93d 0%, #ffb300 100%);
+      border: 3px solid #5c4b99;
+      border-radius: 50%;
+      cursor: grab;
+      box-shadow: 2px 2px 0 rgba(92, 75, 153, 0.4);
+      transition: transform 0.1s;
+      z-index: 10;
+    }
+    
+    .slider-thumb:active {
+      cursor: grabbing;
+      transform: translate(-50%, -50%) scale(1.15);
+    }
+    
+    .slider-thumb::before {
+      content: "🚗";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 14px;
+    }
+    
+    .slider-label {
+      text-align: center;
+      font-size: 0.7rem;
+      color: #5c4b99;
+      margin-top: 5px;
+      font-weight: 600;
+    }
+    
+    /* 彩色圆滚滚星星装饰 */
+    .stars-row {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      padding: 30px 15px 10px;
+      margin-top: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .chubby-star {
+      transform-origin: center;
+      animation: starRoll 2.5s linear infinite;
+      position: relative;
+      filter: drop-shadow(0 0 8px currentColor);
+    }
+    
+    .chubby-star:nth-child(8) { margin-bottom: 5px; animation-duration: 3s; color: #f8c8dc; }
+    .chubby-star:nth-child(9) { margin-bottom: 0px; animation-duration: 2.3s; animation-delay: -0.4s; color: #b5ddee; }
+    .chubby-star:nth-child(10) { margin-bottom: 10px; animation-duration: 3.3s; animation-delay: -0.8s; color: #d7c4e8; }
+    .chubby-star:nth-child(11) { margin-bottom: 3px; animation-duration: 2.6s; animation-delay: -1.2s; color: #fff1c9; }
+    .chubby-star:nth-child(12) { margin-bottom: 7px; animation-duration: 2.9s; animation-delay: -0.6s; color: #c1e8d5; }
+    
+    @keyframes starRoll {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.05); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+    
+    /* 小星星雨 */
+    .mini-meteor {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      animation: miniMeteorFall linear infinite;
+    }
+    
+    .mini-meteor::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 2px;
+      background: linear-gradient(90deg, currentColor, transparent);
+      border-radius: 2px;
+      transform-origin: left center;
+    }
+    
+    .mini-meteor.m1 { top: -5px; left: 10%; color: #fff1c9; animation-duration: 2s; animation-delay: 0s; }
+    .mini-meteor.m2 { top: -5px; left: 25%; color: #f8c8dc; animation-duration: 2.5s; animation-delay: -0.8s; }
+    .mini-meteor.m3 { top: -5px; left: 45%; color: #b5ddee; animation-duration: 2.2s; animation-delay: -1.5s; }
+    .mini-meteor.m4 { top: -5px; left: 65%; color: #d7c4e8; animation-duration: 2.8s; animation-delay: -0.3s; }
+    .mini-meteor.m5 { top: -5px; left: 80%; color: #ffe6a0; animation-duration: 2.3s; animation-delay: -1.2s; }
+    .mini-meteor.m6 { top: -5px; left: 90%; color: #c1e8d5; animation-duration: 2.6s; animation-delay: -0.6s; }
+    .mini-meteor.m7 { top: -5px; left: 5%; color: #fde4ed; animation-duration: 2.1s; animation-delay: -1.8s; }
+    
+    @keyframes miniMeteorFall {
+      0% {
+        transform: translate(-20px, -20px);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate(40px, 50px);
+        opacity: 0;
+      }
+    }
+    
+    .car-moving .car-bounce {
+      animation: carBounce 0.4s ease-in-out infinite;
+    }
+    
+    .car-moving .wheel-spin {
+      animation: wheelSpin 0.5s linear infinite;
+      transform-origin: center;
+    }
+    
+    .car-stopped .car-bounce,
+    .car-stopped .wheel-spin {
+      animation: none;
+    }
+    
+    @keyframes carBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-2px); }
+    }
+    
+    @keyframes wheelSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    .star-twinkle {
+      animation: starTwinkle 1s ease-in-out infinite;
+      transform-origin: center;
+    }
+    
+    @keyframes starTwinkle {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+    
+    .road-dash {
+      stroke-dasharray: 10 8;
+      animation: dashMove 0.8s linear infinite;
+    }
+    
+    @keyframes dashMove {
+      from { stroke-dashoffset: 0; }
+      to { stroke-dashoffset: -18; }
+    }
+    
+    .cloud-small {
+      animation: cloudDrift 4s ease-in-out infinite alternate;
+    }
+    
+    @keyframes cloudDrift {
+      from { transform: translateX(0); }
+      to { transform: translateX(10px); }
+    }
+    
+    /* 花草摇摆动画 */
+    .flower-sway {
+      transform-origin: bottom center;
+      animation: sway 2s ease-in-out infinite;
+    }
+    
+    .flower-sway.delay1 { animation-delay: 0.3s; }
+    .flower-sway.delay2 { animation-delay: 0.6s; }
+    .flower-sway.delay3 { animation-delay: 0.9s; }
+    
+    @keyframes sway {
+      0%, 100% { transform: rotate(-8deg); }
+      50% { transform: rotate(8deg); }
+    }
+    
+    /* 草生长动画 */
+    .grass-grow {
+      transform-origin: bottom center;
+      animation: grassGrow 3s ease-in-out infinite alternate;
+    }
+    
+    @keyframes grassGrow {
+      from { transform: scaleY(0.9) rotate(-3deg); }
+      to { transform: scaleY(1.05) rotate(3deg); }
+    }
+    
+    /* 流星雨动画 */
+    .meteor {
+      animation: meteorFall linear infinite;
+    }
+    
+    .meteor1 { animation-duration: 3s; animation-delay: 0s; }
+    .meteor2 { animation-duration: 4s; animation-delay: 1.5s; }
+    .meteor3 { animation-duration: 3.5s; animation-delay: 2.5s; }
+    .meteor4 { animation-duration: 2.8s; animation-delay: 0.8s; }
+    .meteor5 { animation-duration: 4.2s; animation-delay: 3s; }
+    .meteor6 { animation-duration: 3.2s; animation-delay: 1.2s; }
+    
+    @keyframes meteorFall {
+      0% {
+        transform: translate(-50px, -50px);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate(100px, 100px);
+        opacity: 0;
+      }
+    }
+    
+    /* 星星雨飘落动画 */
+    .star-rain {
+      animation: starRain linear infinite;
+      transform-origin: center;
+    }
+    
+    .star-rain.s1 { animation-duration: 4s; animation-delay: 0s; }
+    .star-rain.s2 { animation-duration: 5s; animation-delay: 0.5s; }
+    .star-rain.s3 { animation-duration: 3.5s; animation-delay: 1s; }
+    .star-rain.s4 { animation-duration: 4.5s; animation-delay: 1.5s; }
+    .star-rain.s5 { animation-duration: 3.8s; animation-delay: 2s; }
+    .star-rain.s6 { animation-duration: 5.2s; animation-delay: 2.5s; }
+    .star-rain.s7 { animation-duration: 4.2s; animation-delay: 0.3s; }
+    .star-rain.s8 { animation-duration: 3.6s; animation-delay: 1.8s; }
+    
+    @keyframes starRain {
+      0% {
+        transform: translateY(-20px) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(200px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    
+    /* 小装饰轻轻摇摆 */
+    .mushroom-sway {
+      transform-origin: bottom center;
+      animation: sway 3s ease-in-out infinite;
+    }
+    
+    .ladybug-sway {
+      transform-origin: bottom center;
+      animation: sway 2.5s ease-in-out infinite;
+      animation-delay: -0.5s;
+    }
+    
+    /* 花花雨飘落动画 */
+    .flower-rain {
+      animation: flowerRain linear infinite;
+      transform-origin: center;
+    }
+    
+    .flower-rain.f1 { animation-duration: 6s; animation-delay: 0s; }
+    .flower-rain.f2 { animation-duration: 7s; animation-delay: 1s; }
+    .flower-rain.f3 { animation-duration: 5.5s; animation-delay: 2s; }
+    .flower-rain.f4 { animation-duration: 6.5s; animation-delay: 0.5s; }
+    .flower-rain.f5 { animation-duration: 7.5s; animation-delay: 1.5s; }
+    .flower-rain.f6 { animation-duration: 5.8s; animation-delay: 2.5s; }
+    .flower-rain.f7 { animation-duration: 6.8s; animation-delay: 3s; }
+    .flower-rain.f8 { animation-duration: 5.2s; animation-delay: 0.8s; }
+    
+    @keyframes flowerRain {
+      0% {
+        transform: translateY(-20px) rotate(0deg) translateX(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.9;
+      }
+      25% {
+        transform: translateY(45px) rotate(90deg) translateX(10px);
+      }
+      50% {
+        transform: translateY(90px) rotate(180deg) translateX(-5px);
+      }
+      75% {
+        transform: translateY(135px) rotate(270deg) translateX(8px);
+      }
+      90% {
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(180px) rotate(360deg) translateX(0);
+        opacity: 0;
+      }
+    }
+    
+    /* 星星闪烁 */
+    .twinkle-star {
+      animation: twinkle 1.5s ease-in-out infinite;
+    }
+    
+    .twinkle-star.t1 { animation-delay: 0.2s; }
+    .twinkle-star.t2 { animation-delay: 0.7s; }
+    .twinkle-star.t3 { animation-delay: 1.2s; }
+    
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+    
+    /* 蝴蝶飞舞 */
+    .butterfly {
+      animation: butterflyFly 6s ease-in-out infinite;
+    }
+    
+    @keyframes butterflyFly {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(40px, -20px) rotate(10deg); }
+      50% { transform: translate(20px, 10px) rotate(-5deg); }
+      75% { transform: translate(-20px, -10px) rotate(5deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+    
+    .wing-flap {
+      animation: wingFlap 0.2s ease-in-out infinite alternate;
+      transform-origin: right center;
+    }
+    
+    @keyframes wingFlap {
+      from { transform: scaleX(1); }
+      to { transform: scaleX(0.6); }
+    }
+    
+    /* EXPERIENCE 窗口 */
+    .experience-window {
+      --rot: 0.5deg;
+    }
+    
+    .go-button {
+      display: inline-block;
+      width: 55px;
+      height: 36px;
+      background: #e88ea0;
+      border: 4px solid #5c4b99;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: #fff;
+      text-shadow: 2px 2px 0 #5c4b99;
+      margin-bottom: 10px;
+      animation: goButton 1s ease-in-out infinite;
+      cursor: pointer;
+    }
+    
+    @keyframes goButton {
+      0%, 100% { transform: scale(1) rotate(-2deg); }
+      50% { transform: scale(1.08) rotate(2deg); }
+    }
+    
+    .go-button:hover { animation: goButtonHover 0.3s ease forwards; }
+    
+    @keyframes goButtonHover {
+      to { transform: scale(1.15) rotate(5deg); background: #ff6b8a; }
+    }
+    
+    .exp-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+    
+    .exp-item:hover {
+      background: rgba(252, 228, 236, 0.6);
+      transform: translateX(5px);
+    }
+    
+    .exp-date {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #5c4b99;
+      width: 110px;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+    
+    .exp-content {
+      flex: 1;
+    }
+    
+    .exp-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #3d3070;
+    }
+    
+    .exp-desc {
+      font-size: 0.75rem;
+      color: #5c4b99;
+      margin-top: 3px;
+      line-height: 1.5;
+    }
+    
+    .road-path {
+      background: #fce4ec;
+      border: 4px solid #5c4b99;
+      border-radius: 25px;
+      padding: 12px 15px;
+      margin-bottom: 15px;
+      position: relative;
+    }
+    
+    .project-box {
+      margin-top: 10px;
+      padding: 12px;
+      background: #fce4ec;
+      border: 3px solid #5c4b99;
+      border-radius: 15px;
+      transition: all 0.2s;
+    }
+    
+    .project-box:hover {
+      background: #f8d0dc;
+      transform: scale(1.02);
+    }
+    
+    .project-box-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #3d3070;
+      margin-bottom: 6px;
+    }
+    
+    .project-box ul {
+      list-style: none;
+      font-size: 0.75rem;
+      color: #5c4b99;
+      line-height: 1.6;
+    }
+    
+    .project-box li {
+      padding-left: 12px;
+      position: relative;
+    }
+    
+    .project-box li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: #e88ea0;
+    }
+    
+    /* 标签徽章 */
+    .tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background: #fff;
+      border: 2px solid #5c4b99;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin: 2px;
+      transition: all 0.2s;
+      cursor: default;
+    }
+    
+    .tag:hover {
+      background: #e88ea0;
+      color: #fff;
+      transform: scale(1.1) rotate(-2deg);
+    }
+    
+    /* 装饰元素 - 放在大窗口边缘，不遮挡内容 */
+    .deco {
+      position: absolute;
+      z-index: 5;
+      pointer-events: none;
+      filter: drop-shadow(2px 2px 0 #5c4b99);
+      opacity: 0.8;
+    }
+    
+    .deco-cursor {
+      top: 70px;
+      right: 80px;
+      font-size: 2rem;
+      animation: cursorMove 5s ease-in-out infinite;
+      z-index: 10;
+    }
+    
+    @keyframes cursorMove {
+      0%, 100% { transform: translate(0, 0) rotate(-20deg); opacity: 0.9; }
+      25% { transform: translate(-20px, 15px) rotate(-10deg); opacity: 0.7; }
+      50% { transform: translate(-40px, 5px) rotate(-30deg); opacity: 0.9; }
+      75% { transform: translate(-15px, -10px) rotate(-15deg); opacity: 0.7; }
+    }
+    
+    .deco-thumbsup {
+      top: 60px;
+      left: 200px;
+      font-size: 2.2rem;
+      animation: thumbsUp 2.5s ease-in-out infinite;
+    }
+    
+    @keyframes thumbsUp {
+      0%, 100% { transform: rotate(10deg) scale(1); }
+      50% { transform: rotate(-5deg) scale(1.15); }
+    }
+    
+    .deco-cloud {
+      font-size: 1.8rem;
+      opacity: 0.6;
+    }
+    
+    .cloud1 {
+      top: 350px;
+      right: 50px;
+      animation: cloudFloat1 10s ease-in-out infinite;
+    }
+    
+    .cloud2 {
+      bottom: 100px;
+      left: 30px;
+      animation: cloudFloat2 12s ease-in-out infinite;
+    }
+    
+    @keyframes cloudFloat1 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(20px, -15px); }
+    }
+    
+    @keyframes cloudFloat2 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-15px, 10px); }
+    }
+    
+    .deco-magnifier {
+      bottom: 80px;
+      right: 40px;
+      width: 50px;
+      height: 50px;
+      animation: magnifierBob 4s ease-in-out infinite;
+    }
+    
+    @keyframes magnifierBob {
+      0%, 100% { transform: translate(0, 0) rotate(-15deg); }
+      50% { transform: translate(8px, -10px) rotate(5deg); }
+    }
+    
+    /* 游戏装饰 - 放在角落 */
+    .game-deco {
+      position: absolute;
+      font-size: 1.4rem;
+      z-index: 5;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+    
+    .game-mushroom {
+      bottom: 30px;
+      right: 150px;
+      animation: gameBounce 2s ease-in-out infinite;
+    }
+    
+    .game-question {
+      top: 200px;
+      right: 15px;
+      animation: gameBounce 2s ease-in-out infinite 0.3s;
+    }
+    
+    .game-character {
+      bottom: 60px;
+      left: 150px;
+      animation: characterRun 3s steps(4) infinite;
+    }
+    
+    .game-brick {
+      display: none;
+    }
+    
+    @keyframes gameBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes characterRun {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(20px); }
+      100% { transform: translateX(0); }
+    }
+    
+    /* 滚动条装饰 */
+    .scroll-bar {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 200px;
+      background: #f0b0be;
+      border: 3px solid #5c4b99;
+      border-radius: 14px;
+      z-index: 100;
+      opacity: 0.8;
+    }
+    
+    .scroll-thumb {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 50px;
+      background: #5c4b99;
+      border-radius: 7px;
+    }
+    
+    .scroll-arrow {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+    }
+    
+    .scroll-arrow.up {
+      top: 6px;
+      border-bottom: 10px solid #5c4b99;
+      animation: arrowBlink 1s ease-in-out infinite;
+    }
+    
+    .scroll-arrow.down {
+      bottom: 6px;
+      border-top: 10px solid #5c4b99;
+      animation: arrowBlink 1s ease-in-out infinite 0.5s;
+    }
+    
+    @keyframes arrowBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    /* 窗口控制按钮 */
+    .window-controls {
+      margin-left: auto;
+      display: flex;
+      gap: 6px;
+    }
+    
+    .win-ctrl {
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.95rem;
+      color: #5c4b99;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .win-ctrl:hover {
+      transform: scale(1.2);
+    }
+    
+    /* 星星装饰 */
+    .sparkle {
+      position: absolute;
+      font-size: 1rem;
+      color: #e88ea0;
+      animation: sparkle 2s ease-in-out infinite;
+      pointer-events: none;
+    }
+    
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1) rotate(180deg); }
+    }
+    
+    /* 响应式 */
+    @media (max-width: 900px) {
+      body {
+        padding: 15px 10px;
+      }
+      .window-content {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        gap: 20px;
+      }
+      .col-left, .col-right {
+        gap: 20px;
+      }
+      .full-width {
+        grid-column: auto;
+      }
+      .skills-content {
+        grid-template-columns: 1fr;
+      }
+      .software-list {
+        border-right: none;
+        border-bottom: 3px solid #5c4b99;
+        padding-right: 0;
+        padding-bottom: 12px;
+        margin-bottom: 12px;
+      }
+      .deco, .game-deco, .scroll-bar {
+        display: none !important;
+      }
+      .interests-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .desktop-titlebar span {
+        display: none;
+      }
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="desktop">
+  <!-- 大窗口标题栏 -->
+  <div class="desktop-titlebar">
+    <div class="traffic-lights">
+      <div class="traffic-light light-close"></div>
+      <div class="traffic-light light-min"></div>
+      <div class="traffic-light light-max"></div>
+    </div>
+    <span style="margin-left:auto; font-weight:700; color:#fff; text-shadow:1px 1px 0 #5c4b99; font-size:0.9rem;">✨ JIANG XINYUE - RESUME</span>
+  </div>
+  
+  <!-- 右侧滚动条 -->
+  <div class="scroll-bar">
+    <div class="scroll-arrow up"></div>
+    <div class="scroll-thumb"></div>
+    <div class="scroll-arrow down"></div>
+  </div>
+  
+  <div class="window-content">
+    
+    <!-- 左列 -->
+    <div class="col-left">
+      <!-- ABOUT ME 窗口 -->
+      <div class="mac-window about-window">
+        <div class="mac-window-titlebar">
+          <div class="traffic-lights">
+            <div class="traffic-light light-close"></div>
+            <div class="traffic-light light-min"></div>
+            <div class="traffic-light light-max"></div>
+          </div>
+          <div class="window-controls">
+            <span class="win-ctrl">○</span>
+          </div>
+        </div>
+        <div class="mac-window-body">
+          <div class="avatar-container">
+            <div class="plus-buttons">
+              <span class="plus-btn">+</span>
+              <span class="plus-btn">+</span>
+            </div>
+            <span class="close-x">×</span>
+            <div class="avatar-decoration"></div>
+            <div class="avatar-circle">
+              <img src="头像2修.jpg" alt="蒋新悦">
+            </div>
+          </div>
+          
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px; justify-content:center;">
+            <span style="font-size:1.3rem; font-weight:900; color:#3d3070;">ABOUT ME</span>
+          </div>
+          
+          <div class="name-row">
+            <span style="font-size:1.5rem; font-weight:900; color:#3d3070;">蒋新悦</span>
+            <span style="color:#5c4b99; font-size:1.2rem;">/</span>
+            <div class="qr-code" onclick="showCert('工作号二维码.jpg')">
+              <img src="工作号二维码.jpg" alt="微信二维码">
+            </div>
+          </div>
+          
+          <div class="divider-line"></div>
+          
+          <div class="info-item">
+            <div class="info-icon">📍</div>
+            <span>重庆</span>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">🎂</div>
+            <span>18岁 · 农历4月14号</span>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">🎓</div>
+            <span>长江师范学院 · 汉语言文学</span>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">💬</div>
+            <span>微信号：a19112799915</span>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📞</div>
+            <span>19112799915</span>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">✉️</div>
+            <span>3698169937@qq.com</span>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">⏳</div>
+            <span>2026级 · 可到岗实习</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- INTERESTS 窗口 -->
+      <div class="mac-window interests-window">
+        <div class="mac-window-titlebar">
+          <div class="window-icon" style="background:#f0c0cb; animation-delay:0.5s;">❤️</div>
+          <div class="mac-window-title">
+            INTERESTS
+            <span class="cn-label">/ 爱好</span>
+          </div>
+        </div>
+        <div class="mac-window-body pink-bg">
+          <div class="interests-grid">
+            <div class="interest-item">
+              <div class="interest-icon">🎨</div>
+              <span class="interest-label">绘画</span>
+            </div>
+            <div class="interest-item">
+              <div class="interest-icon">📷</div>
+              <span class="interest-label">摄影+Ps</span>
+            </div>
+            <div class="interest-item">
+              <div class="interest-icon">🎬</div>
+              <span class="interest-label">看剧</span>
+            </div>
+            <div class="interest-item">
+              <div class="interest-icon">📚</div>
+              <span class="interest-label">跑步</span>
+            </div>
+            <div class="interest-item">
+              <div class="interest-icon">✈️</div>
+              <span class="interest-label">旅游</span>
+            </div>
+            <div class="interest-item">
+              <div class="interest-icon">📸</div>
+              <span class="interest-label">插画</span>
+            </div>
+            <div class="interest-item">
+              <div class="interest-icon">📖</div>
+              <span class="interest-label">看小说</span>
+            </div>
+            <div class="interest-item">
+              <div class="interest-icon">🐶</div>
+              <span class="interest-label">小动物</span>
+            </div>
+            <div class="interest-item">
+              <div class="interest-icon">🎧</div>
+              <span class="interest-label">听歌</span>
+            </div>
+            <div class="interest-item">
+              <div class="interest-icon">☀️</div>
+              <span class="interest-label">散步</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- S弯马路动画装饰 -->
+      <div class="road-animation-container">
+        <svg class="road-svg" viewBox="0 0 340 180" xmlns="http://www.w3.org/2000/svg">
+          <!-- 背景小云朵装饰 -->
+          <g class="cloud-small" opacity="0.6">
+            <ellipse cx="30" cy="30" rx="15" ry="8" fill="#fff"/>
+            <ellipse cx="40" cy="25" rx="12" ry="10" fill="#fff"/>
+            <ellipse cx="50" cy="30" rx="14" ry="7" fill="#fff"/>
+          </g>
+          <g class="cloud-small" opacity="0.5" style="animation-delay:1s;">
+            <ellipse cx="280" cy="20" rx="12" ry="6" fill="#fff"/>
+            <ellipse cx="290" cy="16" rx="10" ry="8" fill="#fff"/>
+            <ellipse cx="298" cy="20" rx="11" ry="6" fill="#fff"/>
+          </g>
+          
+          <!-- S弯马路 - 外框 -->
+          <path d="M 20 40 
+                   C 80 40, 80 140, 170 140 
+                   C 260 140, 260 40, 320 40" 
+                fill="none" stroke="#5c4b99" stroke-width="36" stroke-linecap="round"/>
+          <!-- S弯马路 - 路面 -->
+          <path d="M 20 40 
+                   C 80 40, 80 140, 170 140 
+                   C 260 140, 260 40, 320 40" 
+                fill="none" stroke="#f0c0cb" stroke-width="30" stroke-linecap="round"/>
+          <!-- S弯马路 - 中线虚线（动画移动） -->
+          <path class="road-dash" d="M 20 40 
+                   C 80 40, 80 140, 170 140 
+                   C 260 140, 260 40, 320 40" 
+                fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+          
+          <!-- 闪烁小星星背景 -->
+          <g class="twinkle-star t1">
+            <polygon points="50,15 52,20 57,20 53,24 55,29 50,26 45,29 47,24 43,20 48,20" fill="#ffd93d" opacity="0.8"/>
+          </g>
+          <g class="twinkle-star t2">
+            <polygon points="250,45 251.5,48 255,48 252.5,50 253.5,53.5 250,51.5 246.5,53.5 247.5,50 245,48 248.5,48" fill="#fff" opacity="0.9"/>
+          </g>
+          <g class="twinkle-star t3">
+            <polygon points="120,10 121.5,13 125,13 122.5,15 123.5,18.5 120,16.5 116.5,18.5 117.5,15 115,13 118.5,13" fill="#ffb6c1" opacity="0.8"/>
+          </g>
+          <g class="twinkle-star t1" style="animation-delay:0.5s;">
+            <polygon points="300,60 301,62 303,62 301.5,63.5 302,65.5 300,64.5 298,65.5 298.5,63.5 297,62 299,62" fill="#fff" opacity="0.7"/>
+          </g>
+          
+          <!-- 流星雨 - 更多流星 -->
+          <g class="meteor meteor1" opacity="0.8">
+            <line x1="0" y1="0" x2="15" y2="15" stroke="#ffd93d" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="15" cy="15" r="2" fill="#ffd93d"/>
+            <circle cx="0" cy="0" r="1" fill="#fff"/>
+          </g>
+          <g class="meteor meteor2" opacity="0.7">
+            <line x1="200" y1="-10" x2="220" y2="10" stroke="#ff9eb5" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="220" cy="10" r="1.5" fill="#ff9eb5"/>
+          </g>
+          <g class="meteor meteor3" opacity="0.8">
+            <line x1="80" y1="-5" x2="95" y2="10" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="95" cy="10" r="1.5" fill="#fff"/>
+          </g>
+          <g class="meteor meteor4" opacity="0.75">
+            <line x1="150" y1="-5" x2="170" y2="15" stroke="#ce93d8" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="170" cy="15" r="1.8" fill="#ce93d8"/>
+          </g>
+          <g class="meteor meteor5" opacity="0.7">
+            <line x1="250" y1="-8" x2="265" y2="7" stroke="#90caf9" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="265" cy="7" r="1.5" fill="#90caf9"/>
+          </g>
+          <g class="meteor meteor6" opacity="0.8">
+            <line x1="40" y1="-3" x2="55" y2="12" stroke="#ffeb3b" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="55" cy="12" r="1.6" fill="#ffeb3b"/>
+          </g>
+          
+          <!-- 星星雨 - 飘落的小星星 -->
+          <g class="star-rain s1" transform="translate(30, 0)">
+            <polygon points="0,-4 1,-1 4,-1 1.5,1 2.5,4 0,2 -2.5,4 -1.5,1 -4,-1 -1,-1" fill="#ffd93d" opacity="0.9"/>
+          </g>
+          <g class="star-rain s2" transform="translate(70, 0)">
+            <polygon points="0,-3 0.8,-0.8 3,-0.8 1.2,0.8 2,3 0,1.5 -2,3 -1.2,0.8 -3,-0.8 -0.8,-0.8" fill="#fff" opacity="0.8"/>
+          </g>
+          <g class="star-rain s3" transform="translate(110, 0)">
+            <polygon points="0,-3.5 0.9,-0.9 3.5,-0.9 1.4,0.9 2.3,3.5 0,1.8 -2.3,3.5 -1.4,0.9 -3.5,-0.9 -0.9,-0.9" fill="#ff9eb5" opacity="0.85"/>
+          </g>
+          <g class="star-rain s4" transform="translate(160, 0)">
+            <polygon points="0,-4 1,-1 4,-1 1.5,1 2.5,4 0,2 -2.5,4 -1.5,1 -4,-1 -1,-1" fill="#ce93d8" opacity="0.8"/>
+          </g>
+          <g class="star-rain s5" transform="translate(200, 0)">
+            <polygon points="0,-3 0.8,-0.8 3,-0.8 1.2,0.8 2,3 0,1.5 -2,3 -1.2,0.8 -3,-0.8 -0.8,-0.8" fill="#90caf9" opacity="0.85"/>
+          </g>
+          <g class="star-rain s6" transform="translate(250, 0)">
+            <polygon points="0,-3.5 0.9,-0.9 3.5,-0.9 1.4,0.9 2.3,3.5 0,1.8 -2.3,3.5 -1.4,0.9 -3.5,-0.9 -0.9,-0.9" fill="#ffeb3b" opacity="0.9"/>
+          </g>
+          <g class="star-rain s7" transform="translate(290, 0)">
+            <polygon points="0,-3 0.8,-0.8 3,-0.8 1.2,0.8 2,3 0,1.5 -2,3 -1.2,0.8 -3,-0.8 -0.8,-0.8" fill="#ffd93d" opacity="0.75"/>
+          </g>
+          <g class="star-rain s8" transform="translate(320, 0)">
+            <polygon points="0,-2.5 0.6,-0.6 2.5,-0.6 1,0.6 1.6,2.5 0,1.2 -1.6,2.5 -1,0.6 -2.5,-0.6 -0.6,-0.6" fill="#fff" opacity="0.8"/>
+          </g>
+          
+          <!-- 花花雨 - 飘落的小花朵 -->
+          <g class="flower-rain f1" transform="translate(50, 0)">
+            <circle cx="0" cy="0" r="2.5" fill="#f8b5c5"/>
+            <circle cx="-3" cy="-2" r="2.5" fill="#ff9eb5"/>
+            <circle cx="3" cy="-2" r="2.5" fill="#ff9eb5"/>
+            <circle cx="-2" cy="2.5" r="2.5" fill="#ff9eb5"/>
+            <circle cx="2" cy="2.5" r="2.5" fill="#ff9eb5"/>
+            <circle cx="0" cy="0" r="1.5" fill="#ffd93d"/>
+          </g>
+          <g class="flower-rain f2" transform="translate(90, 0)">
+            <circle cx="0" cy="0" r="2" fill="#ffd93d"/>
+            <circle cx="-2.5" cy="-1.5" r="2" fill="#ffeb3b"/>
+            <circle cx="2.5" cy="-1.5" r="2" fill="#ffeb3b"/>
+            <circle cx="-2" cy="2" r="2" fill="#ffeb3b"/>
+            <circle cx="2" cy="2" r="2" fill="#ffeb3b"/>
+            <circle cx="0" cy="0" r="1" fill="#e88ea0"/>
+          </g>
+          <g class="flower-rain f3" transform="translate(140, 0)">
+            <circle cx="0" cy="0" r="2.5" fill="#ce93d8"/>
+            <circle cx="-3" cy="-2" r="2.5" fill="#e1bee7"/>
+            <circle cx="3" cy="-2" r="2.5" fill="#e1bee7"/>
+            <circle cx="-2.5" cy="2.5" r="2.5" fill="#e1bee7"/>
+            <circle cx="2.5" cy="2.5" r="2.5" fill="#e1bee7"/>
+            <circle cx="0" cy="0" r="1.5" fill="#ffd93d"/>
+          </g>
+          <g class="flower-rain f4" transform="translate(180, 0)">
+            <circle cx="0" cy="0" r="2" fill="#90caf9"/>
+            <circle cx="-2.5" cy="-1.5" r="2" fill="#bbdefb"/>
+            <circle cx="2.5" cy="-1.5" r="2" fill="#bbdefb"/>
+            <circle cx="-2" cy="2" r="2" fill="#bbdefb"/>
+            <circle cx="2" cy="2" r="2" fill="#bbdefb"/>
+            <circle cx="0" cy="0" r="1" fill="#fff"/>
+          </g>
+          <g class="flower-rain f5" transform="translate(230, 0)">
+            <circle cx="0" cy="0" r="2.2" fill="#f8b5c5"/>
+            <circle cx="-2.8" cy="-1.8" r="2.2" fill="#ff9eb5"/>
+            <circle cx="2.8" cy="-1.8" r="2.2" fill="#ff9eb5"/>
+            <circle cx="-2.2" cy="2.2" r="2.2" fill="#ff9eb5"/>
+            <circle cx="2.2" cy="2.2" r="2.2" fill="#ff9eb5"/>
+            <circle cx="0" cy="0" r="1.3" fill="#ffd93d"/>
+          </g>
+          <g class="flower-rain f6" transform="translate(270, 0)">
+            <circle cx="0" cy="0" r="2" fill="#ffeb3b"/>
+            <circle cx="-2.5" cy="-1.5" r="2" fill="#fff176"/>
+            <circle cx="2.5" cy="-1.5" r="2" fill="#fff176"/>
+            <circle cx="-2" cy="2" r="2" fill="#fff176"/>
+            <circle cx="2" cy="2" r="2" fill="#fff176"/>
+            <circle cx="0" cy="0" r="1" fill="#ff9eb5"/>
+          </g>
+          <g class="flower-rain f7" transform="translate(310, 0)">
+            <circle cx="0" cy="0" r="2.3" fill="#e1bee7"/>
+            <circle cx="-2.8" cy="-1.8" r="2.3" fill="#f3e5f5"/>
+            <circle cx="2.8" cy="-1.8" r="2.3" fill="#f3e5f5"/>
+            <circle cx="-2.3" cy="2.3" r="2.3" fill="#f3e5f5"/>
+            <circle cx="2.3" cy="2.3" r="2.3" fill="#f3e5f5"/>
+            <circle cx="0" cy="0" r="1.4" fill="#ffd93d"/>
+          </g>
+          <g class="flower-rain f8" transform="translate(20, 0)">
+            <circle cx="0" cy="0" r="2" fill="#bbdefb"/>
+            <circle cx="-2.5" cy="-1.5" r="2" fill="#e3f2fd"/>
+            <circle cx="2.5" cy="-1.5" r="2" fill="#e3f2fd"/>
+            <circle cx="-2" cy="2" r="2" fill="#e3f2fd"/>
+            <circle cx="2" cy="2" r="2" fill="#e3f2fd"/>
+            <circle cx="0" cy="0" r="1" fill="#fff"/>
+          </g>
+          
+          <!-- 路边花草装饰 - 分散布置在整个画面空白处 -->
+          
+          <!-- 左上角区域 -->
+          <g transform="translate(5, 55)" class="grass-grow">
+            <path d="M0,15 Q3,0 6,15" stroke="#7cb342" stroke-width="1.8" fill="none"/>
+          </g>
+          <g transform="translate(20, 45)" class="flower-sway">
+            <line x1="0" y1="12" x2="0" y2="0" stroke="#7cb342" stroke-width="1.2"/>
+            <circle cx="0" cy="0" r="2.5" fill="#f8b5c5"/>
+            <circle cx="-3" cy="-2" r="2.5" fill="#ff9eb5"/>
+            <circle cx="3" cy="-2" r="2.5" fill="#ff9eb5"/>
+            <circle cx="-2" cy="2" r="2.5" fill="#ff9eb5"/>
+            <circle cx="2" cy="2" r="2.5" fill="#ff9eb5"/>
+            <circle cx="0" cy="0" r="1.5" fill="#ffd93d"/>
+          </g>
+          
+          <!-- 上中区域 -->
+          <g transform="translate(100, 15)" class="flower-sway delay1">
+            <line x1="0" y1="10" x2="0" y2="0" stroke="#7cb342" stroke-width="1"/>
+            <circle cx="0" cy="0" r="2" fill="#ffd93d"/>
+            <circle cx="-2.5" cy="-1.5" r="2" fill="#ffeb3b"/>
+            <circle cx="2.5" cy="-1.5" r="2" fill="#ffeb3b"/>
+            <circle cx="-2" cy="2" r="2" fill="#ffeb3b"/>
+            <circle cx="2" cy="2" r="2" fill="#ffeb3b"/>
+            <circle cx="0" cy="0" r="1" fill="#e88ea0"/>
+          </g>
+          <g transform="translate(125, 20)" class="grass-grow" style="animation-delay:0.3s;">
+            <path d="M0,8 Q1,-3 2,8" stroke="#8bc34a" stroke-width="1.2" fill="none"/>
+            <path d="M3,8 Q5,-5 7,8" stroke="#7cb342" stroke-width="1.2" fill="none"/>
+          </g>
+          <g transform="translate(155, 12)" class="flower-sway delay3">
+            <line x1="0" y1="10" x2="0" y2="0" stroke="#7cb342" stroke-width="1"/>
+            <circle cx="0" cy="0" r="2" fill="#ce93d8"/>
+            <circle cx="-2.5" cy="-1.5" r="2" fill="#e1bee7"/>
+            <circle cx="2.5" cy="-1.5" r="2" fill="#e1bee7"/>
+            <circle cx="-2" cy="2" r="2" fill="#e1bee7"/>
+            <circle cx="2" cy="2" r="2" fill="#e1bee7"/>
+            <circle cx="0" cy="0" r="1" fill="#ffd93d"/>
+          </g>
+          <g transform="translate(190, 18)" class="flower-sway delay2">
+            <line x1="0" y1="10" x2="0" y2="0" stroke="#7cb342" stroke-width="1"/>
+            <circle cx="0" cy="0" r="2" fill="#90caf9"/>
+            <circle cx="-2.5" cy="-1.5" r="2" fill="#bbdefb"/>
+            <circle cx="2.5" cy="-1.5" r="2" fill="#bbdefb"/>
+            <circle cx="-2" cy="2" r="2" fill="#bbdefb"/>
+            <circle cx="2" cy="2" r="2" fill="#bbdefb"/>
+            <circle cx="0" cy="0" r="1" fill="#fff"/>
+          </g>
+          
+          <!-- 右上角区域 -->
+          <g transform="translate(310, 50)" class="grass-grow" style="animation-delay:0.8s;">
+            <path d="M0,12 Q-2,-2 -4,12" stroke="#8bc34a" stroke-width="1.5" fill="none"/>
+            <path d="M-5,12 Q-8,-5 -11,12" stroke="#7cb342" stroke-width="1.5" fill="none"/>
+          </g>
+          <g transform="translate(328, 90)" class="flower-sway">
+            <line x1="0" y1="12" x2="0" y2="0" stroke="#7cb342" stroke-width="1.2"/>
+            <circle cx="0" cy="0" r="2.5" fill="#f8b5c5"/>
+            <circle cx="-3" cy="-2" r="2.5" fill="#ff9eb5"/>
+            <circle cx="3" cy="-2" r="2.5" fill="#ff9eb5"/>
+            <circle cx="-2" cy="2" r="2.5" fill="#ff9eb5"/>
+            <circle cx="2" cy="2" r="2.5" fill="#ff9eb5"/>
+            <circle cx="0" cy="0" r="1.5" fill="#ffd93d"/>
+          </g>
+          
+          <!-- 左中弯道（第一个弯外侧） -->
+          <g transform="translate(0, 85)" class="grass-grow" style="animation-delay:0.5s;">
+            <path d="M0,20 Q4,2 8,20" stroke="#7cb342" stroke-width="2" fill="none"/>
+            <path d="M6,20 Q12,-8 18,20" stroke="#8bc34a" stroke-width="2" fill="none"/>
+            <path d="M14,20 Q20,0 26,20" stroke="#7cb342" stroke-width="2" fill="none"/>
+          </g>
+          <g transform="translate(30, 100)" class="flower-sway delay1">
+            <line x1="0" y1="18" x2="0" y2="0" stroke="#7cb342" stroke-width="1.5"/>
+            <circle cx="0" cy="0" r="3" fill="#ffd93d"/>
+            <circle cx="-4" cy="-3" r="3" fill="#ffeb3b"/>
+            <circle cx="4" cy="-3" r="3" fill="#ffeb3b"/>
+            <circle cx="-3" cy="3" r="3" fill="#ffeb3b"/>
+            <circle cx="3" cy="3" r="3" fill="#ffeb3b"/>
+            <circle cx="0" cy="0" r="2" fill="#e88ea0"/>
+          </g>
+          
+          <!-- 左下角空白区域装饰 -->
+          <!-- 可爱小蘑菇1 -->
+          <g transform="translate(50, 130)" class="mushroom-sway">
+            <rect x="-3" y="0" width="6" height="10" rx="2" fill="#f5e6d3"/>
+            <ellipse cx="0" cy="0" rx="8" ry="6" fill="#e74c3c"/>
+            <circle cx="-3" cy="-2" r="1.5" fill="#fff"/>
+            <circle cx="2" cy="-1" r="1.2" fill="#fff"/>
+            <circle cx="0" cy="2" r="1" fill="#fff"/>
+          </g>
+          <!-- 小蘑菇旁边的小草丛 -->
+          <g transform="translate(42, 138)" class="grass-grow" style="animation-delay:0.3s;">
+            <path d="M0,8 Q1,-3 2,8" stroke="#8bc34a" stroke-width="1.5" fill="none"/>
+            <path d="M3,8 Q5,-5 7,8" stroke="#7cb342" stroke-width="1.5" fill="none"/>
+          </g>
+          <g transform="translate(60, 138)" class="grass-grow" style="animation-delay:0.7s;">
+            <path d="M0,8 Q-1,-3 -2,8" stroke="#8bc34a" stroke-width="1.5" fill="none"/>
+            <path d="M-3,8 Q-5,-5 -7,8" stroke="#7cb342" stroke-width="1.5" fill="none"/>
+          </g>
+          <!-- 可爱小蘑菇2（蓝色） -->
+          <g transform="translate(80, 140)" class="mushroom-sway" style="animation-delay:-1s;">
+            <rect x="-2.5" y="0" width="5" height="8" rx="1.5" fill="#f5e6d3"/>
+            <ellipse cx="0" cy="0" rx="7" ry="5" fill="#90caf9"/>
+            <circle cx="-2" cy="-2" r="1.2" fill="#fff"/>
+            <circle cx="2" cy="-1" r="1" fill="#fff"/>
+          </g>
+          <!-- 小石子装饰 -->
+          <g transform="translate(15, 150)">
+            <ellipse cx="0" cy="0" rx="5" ry="3" fill="#bcaaa4"/>
+            <ellipse cx="6" cy="1" rx="4" ry="2.5" fill="#a1887f"/>
+            <ellipse cx="-5" cy="2" rx="3" ry="2" fill="#8d6e63"/>
+          </g>
+          <!-- 小瓢虫 -->
+          <g transform="translate(70, 148)" class="ladybug-sway">
+            <ellipse cx="0" cy="0" rx="4" ry="5" fill="#e74c3c"/>
+            <line x1="0" y1="-5" x2="0" y2="5" stroke="#000" stroke-width="0.8"/>
+            <circle cx="-2" cy="-2" r="1" fill="#000"/>
+            <circle cx="2" cy="-2" r="1" fill="#000"/>
+            <circle cx="-2" cy="2" r="0.8" fill="#000"/>
+            <circle cx="2" cy="2" r="0.8" fill="#000"/>
+            <circle cx="0" cy="-5" r="2" fill="#000"/>
+            <circle cx="-0.8" cy="-5.5" r="0.5" fill="#fff"/>
+          </g>
+          <!-- 三叶草 -->
+          <g transform="translate(100, 145)" class="flower-sway" style="animation-delay:0.5s;">
+            <line x1="0" y1="8" x2="0" y2="0" stroke="#7cb342" stroke-width="1.2"/>
+            <ellipse cx="-3" cy="-2" rx="2.5" ry="3" fill="#81c784"/>
+            <ellipse cx="3" cy="-2" rx="2.5" ry="3" fill="#81c784"/>
+            <ellipse cx="0" cy="-5" rx="2.5" ry="3" fill="#81c784"/>
+          </g>
+          
+          <!-- 右中弯道（第二个弯内侧上方空白） -->
+          <g transform="translate(240, 30)" class="grass-grow" style="animation-delay:0.4s;">
+            <path d="M0,10 Q1,-2 2,10" stroke="#8bc34a" stroke-width="1.2" fill="none"/>
+            <path d="M3,10 Q5,-6 7,10" stroke="#7cb342" stroke-width="1.2" fill="none"/>
+          </g>
+          <g transform="translate(260, 25)" class="flower-sway delay3">
+            <line x1="0" y1="10" x2="0" y2="0" stroke="#7cb342" stroke-width="1"/>
+            <circle cx="0" cy="0" r="2" fill="#f8b5c5"/>
+            <circle cx="-2.5" cy="-1.5" r="2" fill="#ff9eb5"/>
+            <circle cx="2.5" cy="-1.5" r="2" fill="#ff9eb5"/>
+            <circle cx="-2" cy="2" r="2" fill="#ff9eb5"/>
+            <circle cx="2" cy="2" r="2" fill="#ff9eb5"/>
+            <circle cx="0" cy="0" r="1" fill="#ffd93d"/>
+          </g>
+          
+          <!-- 右中弯道外侧（S弯右侧中间空白） -->
+          <g transform="translate(305, 110)" class="grass-grow" style="animation-delay:1s;">
+            <path d="M0,12 Q-2,-2 -4,12" stroke="#8bc34a" stroke-width="1.5" fill="none"/>
+            <path d="M-5,12 Q-8,-6 -11,12" stroke="#7cb342" stroke-width="1.5" fill="none"/>
+          </g>
+          <g transform="translate(290, 125)" class="flower-sway delay1">
+            <line x1="0" y1="12" x2="0" y2="0" stroke="#7cb342" stroke-width="1.2"/>
+            <circle cx="0" cy="0" r="2.5" fill="#90caf9"/>
+            <circle cx="-3" cy="-2" r="2.5" fill="#bbdefb"/>
+            <circle cx="3" cy="-2" r="2.5" fill="#bbdefb"/>
+            <circle cx="-2" cy="2" r="2.5" fill="#bbdefb"/>
+            <circle cx="2" cy="2" r="2.5" fill="#bbdefb"/>
+            <circle cx="0" cy="0" r="1.5" fill="#fff"/>
+          </g>
+          
+
+          
+          <!-- 额外小草点缀 - 散落在各处空白 -->
+          <g transform="translate(60, 55)" class="grass-grow" style="animation-delay:0.2s;">
+            <path d="M0,8 Q1,-2 2,8" stroke="#8bc34a" stroke-width="1" fill="none"/>
+            <path d="M3,8 Q5,-4 7,8" stroke="#7cb342" stroke-width="1" fill="none"/>
+          </g>
+          <g transform="translate(85, 120)" class="grass-grow" style="animation-delay:0.9s;">
+            <path d="M0,8 Q-1,-3 -2,8" stroke="#8bc34a" stroke-width="1" fill="none"/>
+            <path d="M-3,8 Q-5,-5 -7,8" stroke="#7cb342" stroke-width="1" fill="none"/>
+          </g>
+          
+          <!-- 底部一排整齐排列的花草 -->
+          <!-- 小草1 -->
+          <g transform="translate(10, 172)" class="grass-grow">
+            <path d="M0,6 Q1,-2 2,6" stroke="#7cb342" stroke-width="1.8" fill="none"/>
+            <path d="M3,6 Q5,-5 7,6" stroke="#8bc34a" stroke-width="1.8" fill="none"/>
+          </g>
+          <!-- 粉色小花1 -->
+          <g transform="translate(35, 172)" class="flower-sway">
+            <line x1="0" y1="6" x2="0" y2="0" stroke="#7cb342" stroke-width="1.2"/>
+            <circle cx="0" cy="0" r="2.5" fill="#f8b5c5"/>
+            <circle cx="-3" cy="-2" r="2.5" fill="#ff9eb5"/>
+            <circle cx="3" cy="-2" r="2.5" fill="#ff9eb5"/>
+            <circle cx="-2" cy="2" r="2.5" fill="#ff9eb5"/>
+            <circle cx="2" cy="2" r="2.5" fill="#ff9eb5"/>
+            <circle cx="0" cy="0" r="1.5" fill="#ffd93d"/>
+          </g>
+          <!-- 小草2 -->
+          <g transform="translate(65, 172)" class="grass-grow" style="animation-delay:0.2s;">
+            <path d="M0,6 Q-1,-2 -2,6" stroke="#8bc34a" stroke-width="1.8" fill="none"/>
+            <path d="M-3,6 Q-5,-5 -7,6" stroke="#7cb342" stroke-width="1.8" fill="none"/>
+          </g>
+          <!-- 黄色小花1 -->
+          <g transform="translate(90, 172)" class="flower-sway delay1">
+            <line x1="0" y1="6" x2="0" y2="0" stroke="#7cb342" stroke-width="1.2"/>
+            <circle cx="0" cy="0" r="2.5" fill="#ffd93d"/>
+            <circle cx="-3" cy="-2" r="2.5" fill="#ffeb3b"/>
+            <circle cx="3" cy="-2" r="2.5" fill="#ffeb3b"/>
+            <circle cx="-2" cy="2" r="2.5" fill="#ffeb3b"/>
+            <circle cx="2" cy="2" r="2.5" fill="#ffeb3b"/>
+            <circle cx="0" cy="0" r="1.5" fill="#e88ea0"/>
+          </g>
+          <!-- 小草3 -->
+          <g transform="translate(120, 172)" class="grass-grow" style="animation-delay:0.4s;">
+            <path d="M0,6 Q1,-2 2,6" stroke="#7cb342" stroke-width="1.8" fill="none"/>
+            <path d="M3,6 Q5,-5 7,6" stroke="#8bc34a" stroke-width="1.8" fill="none"/>
+          </g>
+          <!-- 紫色小花1 -->
+          <g transform="translate(145, 172)" class="flower-sway delay2">
+            <line x1="0" y1="6" x2="0" y2="0" stroke="#7cb342" stroke-width="1.2"/>
+            <circle cx="0" cy="0" r="2.5" fill="#ce93d8"/>
+            <circle cx="-3" cy="-2" r="2.5" fill="#e1bee7"/>
+            <circle cx="3" cy="-2" r="2.5" fill="#e1bee7"/>
+            <circle cx="-2" cy="2" r="2.5" fill="#e1bee7"/>
+            <circle cx="2" cy="2" r="2.5" fill="#e1bee7"/>
+            <circle cx="0" cy="0" r="1.5" fill="#ffd93d"/>
+          </g>
+          <!-- 小草4 -->
+          <g transform="translate(175, 172)" class="grass-grow" style="animation-delay:0.6s;">
+            <path d="M0,6 Q-1,-2 -2,6" stroke="#8bc34a" stroke-width="1.8" fill="none"/>
+            <path d="M-3,6 Q-5,-5 -7,6" stroke="#7cb342" stroke-width="1.8" fill="none"/>
+          </g>
+          <!-- 蓝色小花1 -->
+          <g transform="translate(200, 172)" class="flower-sway delay3">
+            <line x1="0" y1="6" x2="0" y2="0" stroke="#7cb342" stroke-width="1.2"/>
+            <circle cx="0" cy="0" r="2.5" fill="#90caf9"/>
+            <circle cx="-3" cy="-2" r="2.5" fill="#bbdefb"/>
+            <circle cx="3" cy="-2" r="2.5" fill="#bbdefb"/>
+            <circle cx="-2" cy="2" r="2.5" fill="#bbdefb"/>
+            <circle cx="2" cy="2" r="2.5" fill="#bbdefb"/>
+            <circle cx="0" cy="0" r="1.5" fill="#fff"/>
+          </g>
+          <!-- 小草5 -->
+          <g transform="translate(230, 172)" class="grass-grow" style="animation-delay:0.8s;">
+            <path d="M0,6 Q1,-2 2,6" stroke="#7cb342" stroke-width="1.8" fill="none"/>
+            <path d="M3,6 Q5,-5 7,6" stroke="#8bc34a" stroke-width="1.8" fill="none"/>
+          </g>
+          <!-- 粉色小花2 -->
+          <g transform="translate(255, 172)" class="flower-sway">
+            <line x1="0" y1="6" x2="0" y2="0" stroke="#7cb342" stroke-width="1.2"/>
+            <circle cx="0" cy="0" r="2.5" fill="#f8b5c5"/>
+            <circle cx="-3" cy="-2" r="2.5" fill="#ff9eb5"/>
+            <circle cx="3" cy="-2" r="2.5" fill="#ff9eb5"/>
+            <circle cx="-2" cy="2" r="2.5" fill="#ff9eb5"/>
+            <circle cx="2" cy="2" r="2.5" fill="#ff9eb5"/>
+            <circle cx="0" cy="0" r="1.5" fill="#ffd93d"/>
+          </g>
+          <!-- 小草6 -->
+          <g transform="translate(285, 172)" class="grass-grow" style="animation-delay:1s;">
+            <path d="M0,6 Q-1,-2 -2,6" stroke="#8bc34a" stroke-width="1.8" fill="none"/>
+            <path d="M-3,6 Q-5,-5 -7,6" stroke="#7cb342" stroke-width="1.8" fill="none"/>
+          </g>
+          <!-- 黄色小花2 -->
+          <g transform="translate(310, 172)" class="flower-sway delay1">
+            <line x1="0" y1="6" x2="0" y2="0" stroke="#7cb342" stroke-width="1.2"/>
+            <circle cx="0" cy="0" r="2.5" fill="#ffd93d"/>
+            <circle cx="-3" cy="-2" r="2.5" fill="#ffeb3b"/>
+            <circle cx="3" cy="-2" r="2.5" fill="#ffeb3b"/>
+            <circle cx="-2" cy="2" r="2.5" fill="#ffeb3b"/>
+            <circle cx="2" cy="2" r="2.5" fill="#ffeb3b"/>
+            <circle cx="0" cy="0" r="1.5" fill="#e88ea0"/>
+          </g>
+          
+          <!-- 飞舞的小蝴蝶 -->
+          <g class="butterfly" transform="translate(80, 50)">
+            <g class="wing-flap">
+              <ellipse cx="-5" cy="0" rx="5" ry="4" fill="#e88ea0" stroke="#5c4b99" stroke-width="0.8"/>
+              <ellipse cx="-5" cy="4" rx="3.5" ry="3" fill="#f8b5c5" stroke="#5c4b99" stroke-width="0.8"/>
+            </g>
+            <g class="wing-flap" style="animation-delay:-0.1s; transform-origin:left center;">
+              <ellipse cx="5" cy="0" rx="5" ry="4" fill="#e88ea0" stroke="#5c4b99" stroke-width="0.8"/>
+              <ellipse cx="5" cy="4" rx="3.5" ry="3" fill="#f8b5c5" stroke="#5c4b99" stroke-width="0.8"/>
+            </g>
+            <ellipse cx="0" cy="2" rx="1" ry="4" fill="#5c4b99"/>
+          </g>
+          
+          <!-- 运动路径定义 -->
+          <defs>
+            <path id="sCurvePath" d="M 20 40 
+                   C 80 40, 80 140, 170 140 
+                   C 260 140, 260 40, 320 40" 
+                fill="none"/>
+          </defs>
+          
+          <!-- 星星人开小车 -->
+          <g id="drivingCar" class="car-stopped">
+            <!-- 小车车身 -->
+            <g transform="translate(-22, -15)">
+              <!-- 车身 -->
+              <rect x="5" y="8" width="35" height="18" rx="6" fill="#e88ea0" stroke="#5c4b99" stroke-width="2"/>
+              <!-- 车顶/驾驶座 -->
+              <rect x="12" y="0" width="20" height="12" rx="4" fill="#f8b5c5" stroke="#5c4b99" stroke-width="2"/>
+              <!-- 车窗 -->
+              <rect x="15" y="3" width="14" height="7" rx="2" fill="#fff" opacity="0.7"/>
+              <!-- 星星人司机 - 在车窗里 -->
+              <g class="star-twinkle" transform="translate(22, 6)">
+                <!-- 星星身体 -->
+                <polygon points="0,-5 1.5,-1.5 5,-1.5 2,1 3,5 0,2.5 -3,5 -2,1 -5,-1.5 -1.5,-1.5" 
+                         fill="#ffd93d" stroke="#5c4b99" stroke-width="1"/>
+                <!-- 眼睛 -->
+                <circle cx="-1.5" cy="0" r="0.8" fill="#5c4b99"/>
+                <circle cx="1.5" cy="0" r="0.8" fill="#5c4b99"/>
+                <!-- 微笑 -->
+                <path d="M-1.5 1.5 Q0 3 1.5 1.5" fill="none" stroke="#5c4b99" stroke-width="0.8" stroke-linecap="round"/>
+              </g>
+              <!-- 车轮 -->
+              <g class="wheel-spin">
+                <circle cx="12" cy="28" r="5" fill="#5c4b99"/>
+                <circle cx="12" cy="28" r="2" fill="#f0c0cb"/>
+              </g>
+              <g class="wheel-spin" style="animation-delay:-0.1s;">
+                <circle cx="32" cy="28" r="5" fill="#5c4b99"/>
+                <circle cx="32" cy="28" r="2" fill="#f0c0cb"/>
+              </g>
+              <!-- 车灯 -->
+              <circle cx="38" cy="17" r="2" fill="#ffd93d"/>
+            </g>
+          </g>
+        </svg>
+        <div class="slider-container">
+          <div class="slider-track" id="sliderTrack">
+            <div class="slider-thumb" id="sliderThumb"></div>
+          </div>
+          <div class="slider-label">← 拖动拉杆，小车出发！→</div>
+          <div class="stars-row">
+            <!-- 小星星雨 -->
+            <div class="mini-meteor m1"></div>
+            <div class="mini-meteor m2"></div>
+            <div class="mini-meteor m3"></div>
+            <div class="mini-meteor m4"></div>
+            <div class="mini-meteor m5"></div>
+            <div class="mini-meteor m6"></div>
+            <div class="mini-meteor m7"></div>
+            
+            <!-- 1. 马卡龙粉星星 -->
+            <svg class="chubby-star" width="36" height="36" viewBox="0 0 40 40">
+              <defs>
+                <radialGradient id="pinkGrad" cx="35%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#fef5f9"/>
+                  <stop offset="50%" stop-color="#f8c8dc"/>
+                  <stop offset="100%" stop-color="#f2a5c3"/>
+                </radialGradient>
+              </defs>
+              <path d="M20 3 C20 3 23 10 26 14 C28 17 35 14 37 19 C39 24 32 27 30 31 C28 35 22 34 20 37 C18 34 12 35 10 31 C8 27 1 24 3 19 C5 14 12 17 14 14 C17 10 20 3 20 3 Z" 
+                    fill="url(#pinkGrad)" stroke="#fde4ed" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+            
+            <!-- 2. 马卡龙蓝星星 -->
+            <svg class="chubby-star" width="40" height="40" viewBox="0 0 40 40">
+              <defs>
+                <radialGradient id="blueGrad" cx="35%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#f2f9fd"/>
+                  <stop offset="50%" stop-color="#b5ddee"/>
+                  <stop offset="100%" stop-color="#8ecae0"/>
+                </radialGradient>
+              </defs>
+              <path d="M20 3 C20 3 23 10 26 14 C28 17 35 14 37 19 C39 24 32 27 30 31 C28 35 22 34 20 37 C18 34 12 35 10 31 C8 27 1 24 3 19 C5 14 12 17 14 14 C17 10 20 3 20 3 Z" 
+                    fill="url(#blueGrad)" stroke="#e0f0f8" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+            
+            <!-- 3. 马卡龙紫星星 -->
+            <svg class="chubby-star" width="34" height="34" viewBox="0 0 40 40">
+              <defs>
+                <radialGradient id="purpleGrad" cx="35%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#f9f5fc"/>
+                  <stop offset="50%" stop-color="#d7c4e8"/>
+                  <stop offset="100%" stop-color="#c0a7d9"/>
+                </radialGradient>
+              </defs>
+              <path d="M20 3 C20 3 23 10 26 14 C28 17 35 14 37 19 C39 24 32 27 30 31 C28 35 22 34 20 37 C18 34 12 35 10 31 C8 27 1 24 3 19 C5 14 12 17 14 14 C17 10 20 3 20 3 Z" 
+                    fill="url(#purpleGrad)" stroke="#ebdff3" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+            
+            <!-- 4. 马卡龙黄星星 -->
+            <svg class="chubby-star" width="38" height="38" viewBox="0 0 40 40">
+              <defs>
+                <radialGradient id="orangeGrad" cx="35%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#fffdf0"/>
+                  <stop offset="50%" stop-color="#fff1c9"/>
+                  <stop offset="100%" stop-color="#ffe6a0"/>
+                </radialGradient>
+              </defs>
+              <path d="M20 3 C20 3 23 10 26 14 C28 17 35 14 37 19 C39 24 32 27 30 31 C28 35 22 34 20 37 C18 34 12 35 10 31 C8 27 1 24 3 19 C5 14 12 17 14 14 C17 10 20 3 20 3 Z" 
+                    fill="url(#orangeGrad)" stroke="#fff8dc" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+            
+            <!-- 5. 马卡龙绿星星 -->
+            <svg class="chubby-star" width="36" height="36" viewBox="0 0 40 40">
+              <defs>
+                <radialGradient id="mintGrad" cx="35%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#f2faf6"/>
+                  <stop offset="50%" stop-color="#c1e8d5"/>
+                  <stop offset="100%" stop-color="#a0d9bd"/>
+                </radialGradient>
+              </defs>
+              <path d="M20 3 C20 3 23 10 26 14 C28 17 35 14 37 19 C39 24 32 27 30 31 C28 35 22 34 20 37 C18 34 12 35 10 31 C8 27 1 24 3 19 C5 14 12 17 14 14 C17 10 20 3 20 3 Z" 
+                    fill="url(#mintGrad)" stroke="#e0f2e8" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 右列 -->
+    <div class="col-right">
+      <!-- AWARDS/CERTIFICATES 窗口 -->
+      <div class="mac-window awards-window">
+        <div class="mac-window-titlebar">
+          <div class="window-icon" style="background:#f0c0cb;">🏆</div>
+          <div class="mac-window-title">
+            CERTIFICATES
+            <span class="cn-label">/ 证书认证</span>
+          </div>
+          <div class="window-controls">
+            <span class="win-ctrl">↗</span>
+          </div>
+        </div>
+        <div class="mac-window-body pink-bg">
+          <div class="awards-list">
+            <div class="award-item">
+              <span class="award-icon">🤖</span>
+              <div>
+                <div style="font-weight:700;">人工智能训练师（高级）</div>
+                <div style="font-size:0.75rem; opacity:0.8;">达摩院 · 2026.07</div>
+              </div>
+            </div>
+            <div class="award-item">
+              <span class="award-icon">☁️</span>
+              <div>
+                <div style="font-weight:700;">阿里云Clouder - 通义灵码AI编码</div>
+                <div style="font-size:0.75rem; opacity:0.8;">阿里云 · 有效期至2028.07</div>
+              </div>
+            </div>
+            <div class="award-item">
+              <span class="award-icon">🍃</span>
+              <div>
+                <div style="font-weight:700;">阿里云Clouder - Spring AI应用开发</div>
+                <div style="font-size:0.75rem; opacity:0.8;">阿里云 · 有效期至2028.07</div>
+              </div>
+            </div>
+            <div class="award-item">
+              <span class="award-icon">✍️</span>
+              <div>
+                <div style="font-weight:700;">Prompt工程师认证</div>
+                <div style="font-size:0.75rem; opacity:0.8;">科大讯飞AI大学堂 · 2026.07</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 证书图片展示区 -->
+          <div class="cert-gallery">
+            <div class="cert-thumb" onclick="showCert('AI训高.jpg')">
+              <img src="AI训高.jpg" alt="人工智能训练师证书">
+              <div class="cert-label">AI训练师（高级）</div>
+            </div>
+            <div class="cert-thumb" onclick="showCert('AI证书2.jpg')">
+              <img src="AI证书2.jpg" alt="通义灵码AI编码">
+              <div class="cert-label">通义灵码编码</div>
+            </div>
+            <div class="cert-thumb" onclick="showCert('AI证书3.jpg')">
+              <img src="AI证书3.jpg" alt="Spring AI应用开发">
+              <div class="cert-label">Spring AI开发</div>
+            </div>
+            <div class="cert-thumb" onclick="showCert('Prompt工程师认证.png')">
+              <img src="Prompt工程师认证.png" alt="Prompt工程师认证">
+              <div class="cert-label">Prompt工程师</div>
+            </div>
+          </div>
+          
+          <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:4px;">
+            <span class="tag">AI训练</span>
+            <span class="tag">阿里云</span>
+            <span class="tag">Prompt工程</span>
+            <span class="tag">Spring AI</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- EXPERIENCE 窗口 -->
+      <div class="mac-window experience-window">
+        <div class="mac-window-titlebar">
+          <div class="window-icon" style="background:#f0c0cb; animation-delay:1s;">💼</div>
+          <div class="mac-window-title">
+            EXPERIENCE
+            <span class="cn-label">/ 实践经历</span>
+          </div>
+        </div>
+        <div class="mac-window-body">
+          <div class="go-button">Go!</div>
+          
+          <div class="exp-item">
+            <div class="exp-date">至目前<br>校园视觉创意工作室</div>
+            <div class="exp-content">
+              <div class="exp-title">视觉策划助理</div>
+              <div class="exp-desc">协助活动主视觉设计，参与海报与社交媒体图文输出，运用PS与AI工具快速产出多版本视觉方案</div>
+            </div>
+          </div>
+          
+          <div class="road-path">
+            <div class="exp-item">
+              <div class="exp-date">至目前<br>自媒体个人项目</div>
+              <div class="exp-content">
+                <div class="exp-title">内容运营与视觉主理人</div>
+                <div class="exp-desc">独立运营账号视觉体系，完成图文排版与封面设计，使用Midjourney生成概念图提升内容吸引力</div>
+                <div style="font-size:0.7rem; color:#8877aa; margin-top:3px;">（正在探索中）</div>
+              </div>
+            </div>
+            <div class="exp-item">
+              <div class="exp-date">至目前<br>电商选品模拟实战</div>
+              <div class="exp-content">
+                <div class="exp-title">项目负责人 · 视觉设计</div>
+                <div class="exp-desc">负责视觉呈现与商品主图设计，结合AI生成多组banner，团队协作完成详情页与活动页视觉方案</div>
+              </div>
+            </div>
+            <div class="exp-item">
+              <div class="exp-date">至目前<br>销售电脑</div>
+              <div class="exp-content">
+                <div class="exp-title">电脑销售</div>
+                <div style="font-size:0.7rem; color:#8877aa; margin-top:3px;">（正在实践中）</div>
+                <div class="exp-desc">正在通过自媒体和朋友圈推广，电脑能根据客户需求做基础配置推荐，具备一定的电脑知识和销售话术，积累持续实战中。</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="project-box">
+            <div class="project-box-title">🎯 AI视觉项目</div>
+            <ul>
+              <li>智能体电商海报生成：DeepSeek + Midjourney + PS，1天产出20+版主图</li>
+              <li>校园活动主视觉：Photoshop + AI辅助，3版海报被工作室采用</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 全宽：SKILLS 窗口 -->
+    <div class="mac-window skills-window full-width">
+      <div class="mac-window-titlebar">
+        <div class="window-icon" style="background:#f0c0cb; animation-delay:1.5s;">✨</div>
+        <div class="mac-window-title">
+          SKILLS
+          <span class="cn-label">/ 技能矩阵</span>
+        </div>
+        <div class="window-controls">
+          <span class="win-ctrl">—</span>
+          <span class="win-ctrl">□</span>
+          <span class="win-ctrl">×</span>
+        </div>
+      </div>
+      <div class="mac-window-body">
+        <div class="skills-content">
+          <div class="software-list">
+            <div class="software-item">
+              <div class="software-icon" style="background:linear-gradient(135deg,#e88ea0,#d87890);">🎨</div>
+              <span>AI绘画·Prompt</span>
+            </div>
+            <div class="software-item">
+              <div class="software-icon" style="background:#3d3d3d;">Ps</div>
+              <span>PHOTOSHOP</span>
+            </div>
+            <div class="software-item">
+              <div class="software-icon" style="background:linear-gradient(135deg,#f0b0be,#e898aa);">🛒</div>
+              <span>电商视觉设计</span>
+            </div>
+            <div class="software-item">
+              <div class="software-icon" style="background:linear-gradient(135deg,#9b8bc4,#7c6bb0);">🎬</div>
+              <span>视频脚本策划</span>
+            </div>
+            <div class="software-item">
+              <div class="software-icon" style="background:linear-gradient(135deg,#b0a0d0,#9080c0);">📝</div>
+              <span>办公协作</span>
+            </div>
+            <div class="software-item">
+              <div class="software-icon" style="background:linear-gradient(135deg,#6bcb77,#4ab066);">🤖</div>
+              <span>智能体开发</span>
+            </div>
+          </div>
+          <div class="skills-bars">
+            <div class="skill-bar-item" style="--level:85%;">
+              <div class="skill-label"><span>AI绘画·Prompt</span><span>85%</span></div>
+              <div class="skill-track">
+                <div class="skill-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar-item" style="--level:80%;">
+              <div class="skill-label"><span>Photoshop 设计</span><span>80%</span></div>
+              <div class="skill-track">
+                <div class="skill-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar-item" style="--level:70%;">
+              <div class="skill-label"><span>电商视觉设计</span><span>70%</span></div>
+              <div class="skill-track">
+                <div class="skill-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar-item" style="--level:30%;">
+              <div class="skill-label"><span>视频脚本策划</span><span>30%</span></div>
+              <div class="skill-track">
+                <div class="skill-fill"></div>
+              </div>
+            </div>
+            <div class="skill-bar-item" style="--level:30%;">
+              <div class="skill-label"><span>办公协作</span><span>30%</span></div>
+              <div class="skill-track">
+                <div class="skill-fill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 装饰元素 - 放在大窗口边缘空白处 -->
+    <div class="deco deco-cursor">➤</div>
+    <div class="deco deco-thumbsup">👍</div>
+    <div class="deco deco-cloud cloud1">☁️</div>
+    <div class="deco deco-cloud cloud2">☁️</div>
+    
+    <div class="game-deco game-mushroom">🍄</div>
+    <div class="game-deco game-question">❓</div>
+    <div class="game-deco game-character">🏃</div>
+    
+    <!-- 放大镜装饰 -->
+    <svg class="deco deco-magnifier" viewBox="0 0 70 70">
+      <circle cx="30" cy="30" r="25" fill="#f0c0cb" stroke="#5c4b99" stroke-width="5"/>
+      <circle cx="30" cy="30" r="18" fill="rgba(255,255,255,0.5)"/>
+      <line x1="50" y1="50" x2="68" y2="68" stroke="#5c4b99" stroke-width="8" stroke-linecap="round"/>
+    </svg>
+    
+  </div>
+</div>
+
+<!-- 证书大图查看器 -->
+<div class="cert-lightbox" id="certLightbox" onclick="closeCert()">
+  <div class="cert-close" onclick="closeCert()">✕</div>
+  <img id="certLargeImg" src="" alt="证书大图">
+</div>
+
+<script>
+  // 显示证书大图
+  function showCert(imgSrc) {
+    const lightbox = document.getElementById('certLightbox');
+    const largeImg = document.getElementById('certLargeImg');
+    largeImg.src = imgSrc;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  
+  // 关闭证书大图
+  function closeCert() {
+    const lightbox = document.getElementById('certLightbox');
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  
+  // ESC键关闭
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeCert();
+  });
+
+  // 页面加载后为技能条设置延迟动画
+  document.addEventListener('DOMContentLoaded', () => {
+    // 为兴趣图标添加随机动画延迟
+    document.querySelectorAll('.interest-item').forEach((item, i) => {
+      item.style.animationDelay = `${i * 0.1}s`;
+    });
+    
+    // 点击彩蛋 - 点击Go按钮
+    const goBtn = document.querySelector('.go-button');
+    if (goBtn) {
+      goBtn.addEventListener('click', () => {
+        goBtn.style.animation = 'none';
+        setTimeout(() => {
+          goBtn.style.animation = 'goButton 0.3s ease 3';
+        }, 10);
+        setTimeout(() => {
+          goBtn.style.animation = 'goButton 1s ease-in-out infinite';
+        }, 1000);
+      });
+    }
+    
+    // 关闭按钮效果
+    document.querySelectorAll('.close-x').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const window = e.target.closest('.mac-window');
+        window.style.animation = 'none';
+        window.style.transform = 'scale(0.8) rotate(10deg)';
+        window.style.opacity = '0';
+        window.style.transition = 'all 0.3s ease';
+        setTimeout(() => {
+          window.style.transform = '';
+          window.style.opacity = '';
+          window.style.transition = '';
+          window.style.animation = '';
+        }, 600);
+      });
+    });
+    
+    // 手动拉杆控制小车
+    const sliderThumb = document.getElementById('sliderThumb');
+    const sliderTrack = document.getElementById('sliderTrack');
+    const drivingCar = document.getElementById('drivingCar');
+    const sCurvePath = document.getElementById('sCurvePath');
+    
+    if (sliderThumb && sliderTrack && drivingCar && sCurvePath) {
+      let isDragging = false;
+      let currentProgress = 0;
+      
+      // 获取路径总长度
+      const pathLength = sCurvePath.getTotalLength();
+      
+      // 更新小车位置
+      function updateCarPosition(progress) {
+        progress = Math.max(0, Math.min(1, progress));
+        const point = sCurvePath.getPointAtLength(progress * pathLength);
+        
+        // 获取切线方向来计算旋转角度
+        let angle = 0;
+        if (progress < 0.99) {
+          const nextPoint = sCurvePath.getPointAtLength(Math.min((progress + 0.01) * pathLength, pathLength));
+          angle = Math.atan2(nextPoint.y - point.y, nextPoint.x - point.x) * 180 / Math.PI;
+        }
+        
+        // 应用变换：平移到位置 + 旋转
+        drivingCar.setAttribute('transform', `translate(${point.x}, ${point.y}) rotate(${angle})`);
+      }
+      
+      // 根据鼠标/触摸位置更新进度
+      function updateProgressFromEvent(clientX) {
+        const trackRect = sliderTrack.getBoundingClientRect();
+        let percent = (clientX - trackRect.left) / trackRect.width;
+        percent = Math.max(0, Math.min(1, percent));
+        currentProgress = percent;
+        
+        // 更新拉杆位置
+        sliderThumb.style.left = `${percent * 100}%`;
+        
+        // 更新小车位置
+        updateCarPosition(percent);
+        
+        // 小车移动时启动动画，停止时暂停
+        if (percent > 0 && percent < 1) {
+          drivingCar.classList.remove('car-stopped');
+          drivingCar.classList.add('car-moving');
+        } else {
+          drivingCar.classList.remove('car-moving');
+          drivingCar.classList.add('car-stopped');
+        }
+      }
+      
+      // 初始化小车在起点
+      updateCarPosition(0);
+      
+      // 鼠标事件
+      sliderThumb.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        e.preventDefault();
+      });
+      
+      sliderTrack.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        updateProgressFromEvent(e.clientX);
+        e.preventDefault();
+      });
+      
+      document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+          updateProgressFromEvent(e.clientX);
+        }
+      });
+      
+      document.addEventListener('mouseup', () => {
+        isDragging = false;
+        // 如果在终点或起点，保持停止状态
+        if (currentProgress <= 0 || currentProgress >= 1) {
+          drivingCar.classList.remove('car-moving');
+          drivingCar.classList.add('car-stopped');
+        }
+      });
+      
+      // 触摸事件支持
+      sliderThumb.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        e.preventDefault();
+      });
+      
+      sliderTrack.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        updateProgressFromEvent(e.touches[0].clientX);
+        e.preventDefault();
+      });
+      
+      document.addEventListener('touchmove', (e) => {
+        if (isDragging) {
+          updateProgressFromEvent(e.touches[0].clientX);
+        }
+      });
+      
+      document.addEventListener('touchend', () => {
+        isDragging = false;
+        if (currentProgress <= 0 || currentProgress >= 1) {
+          drivingCar.classList.remove('car-moving');
+          drivingCar.classList.add('car-stopped');
+        }
+      });
+    }
+  });
+</script>
+
+<!-- 自定义花朵滚动条 -->
+<div class="flower-scrollbar" id="flowerScrollbar">
+  <div class="flower-scroll-track" id="flowerTrack">
+    <div class="flower-scroll-thumb" id="flowerThumb">
+      <!-- 粉色可爱小花（无表情） -->
+      <svg width="32" height="32" viewBox="0 0 40 40">
+        <defs>
+          <radialGradient id="flowerGrad" cx="35%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#fef5f9"/>
+            <stop offset="50%" stop-color="#f8c8dc"/>
+            <stop offset="100%" stop-color="#f4a7c5"/>
+          </radialGradient>
+        </defs>
+        <!-- 5片花瓣 -->
+        <ellipse cx="20" cy="8" rx="6" ry="8" fill="url(#flowerGrad)" stroke="#fde4ed" stroke-width="1.5"/>
+        <ellipse cx="20" cy="8" rx="6" ry="8" fill="url(#flowerGrad)" stroke="#fde4ed" stroke-width="1.5" transform="rotate(72 20 20)"/>
+        <ellipse cx="20" cy="8" rx="6" ry="8" fill="url(#flowerGrad)" stroke="#fde4ed" stroke-width="1.5" transform="rotate(144 20 20)"/>
+        <ellipse cx="20" cy="8" rx="6" ry="8" fill="url(#flowerGrad)" stroke="#fde4ed" stroke-width="1.5" transform="rotate(216 20 20)"/>
+        <ellipse cx="20" cy="8" rx="6" ry="8" fill="url(#flowerGrad)" stroke="#fde4ed" stroke-width="1.5" transform="rotate(288 20 20)"/>
+        <!-- 黄色花心 -->
+        <circle cx="20" cy="20" r="5" fill="#fff1c9" stroke="#ffe6a0" stroke-width="1"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<script>
+// 花朵滚动条交互逻辑
+(function() {
+  const thumb = document.getElementById('flowerThumb');
+  const track = document.getElementById('flowerTrack');
+  let isDragging = false;
+  let startY, startTop;
+  
+  // 更新花朵位置根据页面滚动
+  function updateFlowerPosition() {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const trackHeight = track.clientHeight - thumb.clientHeight;
+    
+    if (scrollHeight > 0) {
+      const top = (scrollTop / scrollHeight) * trackHeight;
+      thumb.style.top = top + 'px';
+    } else {
+      thumb.style.top = '0px';
+    }
+  }
+  
+  // 拖动开始
+  function onDragStart(e) {
+    isDragging = true;
+    thumb.classList.add('dragging');
+    startY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+    startTop = parseFloat(thumb.style.top) || 0;
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  
+  // 拖动中
+  function onDragMove(e) {
+    if (!isDragging) return;
+    
+    const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+    const deltaY = clientY - startY;
+    const trackHeight = track.clientHeight - thumb.clientHeight;
+    
+    let newTop = startTop + deltaY;
+    newTop = Math.max(0, Math.min(newTop, trackHeight));
+    
+    thumb.style.top = newTop + 'px';
+    
+    // 计算并设置页面滚动位置
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollTop = (newTop / trackHeight) * scrollHeight;
+    window.scrollTo(0, scrollTop);
+    
+    e.preventDefault();
+  }
+  
+  // 拖动结束
+  function onDragEnd() {
+    isDragging = false;
+    thumb.classList.remove('dragging');
+  }
+  
+  // 点击轨道跳转
+  function onTrackClick(e) {
+    if (e.target === thumb) return;
+    
+    const trackRect = track.getBoundingClientRect();
+    const clickY = (e.type.includes('touch') ? e.touches[0].clientY : e.clientY) - trackRect.top;
+    const trackHeight = track.clientHeight - thumb.clientHeight;
+    
+    let newTop = clickY - thumb.clientHeight / 2;
+    newTop = Math.max(0, Math.min(newTop, trackHeight));
+    
+    thumb.style.top = newTop + 'px';
+    
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollTop = (newTop / trackHeight) * scrollHeight;
+    window.scrollTo({
+      top: scrollTop,
+      behavior: 'smooth'
+    });
+  }
+  
+  // 绑定事件
+  thumb.addEventListener('mousedown', onDragStart);
+  thumb.addEventListener('touchstart', onDragStart, { passive: false });
+  document.addEventListener('mousemove', onDragMove);
+  document.addEventListener('touchmove', onDragMove, { passive: false });
+  document.addEventListener('mouseup', onDragEnd);
+  document.addEventListener('touchend', onDragEnd);
+  track.addEventListener('click', onTrackClick);
+  window.addEventListener('scroll', updateFlowerPosition);
+  window.addEventListener('resize', updateFlowerPosition);
+  
+  // 初始化位置
+  updateFlowerPosition();
+})();
+</script>
+
+</body>
+</html>
