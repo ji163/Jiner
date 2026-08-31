@@ -844,7 +844,7 @@
     }
 
     .journey-kicker {
-      margin-top: 7px;
+      margin-top: 3px;
       color: rgba(255,255,255,0.48);
       font-size: 0.52rem;
       font-weight: 700;
@@ -1835,7 +1835,7 @@
       font-size: 0.71rem;
       line-height: 1.6;
     }
-
+    
     .road-path {
       background: #fce4ec;
       border: 4px solid #5c4b99;
@@ -2072,7 +2072,7 @@
       border-radius: 10px;
       background: rgba(255,255,255,0.96);
       color: #5c4b99;
-      font-size: 0.62rem;
+      font-size: clamp(0.82rem, 2vw, 1.18rem);
       font-weight: 700;
       text-align: center;
       transform: translateX(-50%);
@@ -2120,7 +2120,7 @@
       content: '已点亮 ✦';
       color: #fff7fa;
     }
-
+    
     /* 作品星系：照片围绕流沙恒星公转 */
     .design-canvas {
       min-height: 590px;
@@ -2825,6 +2825,316 @@
         transition-duration: 0.01ms !important;
       }
     }
+    /* 实践经历：紧凑的编辑式信息布局与轻量装饰 */
+    .experience-window .mac-window-body {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 94% 4%, rgba(181,157,221,0.24), transparent 23%),
+        radial-gradient(circle at 2% 96%, rgba(232,142,160,0.16), transparent 25%),
+        linear-gradient(145deg, #fffafd 0%, #fdf0f4 52%, #f1edfa 100%);
+    }
+
+    .experience-window .mac-window-body::before {
+      content: 'PRACTICE / FIELD NOTES / 2026';
+      position: absolute;
+      top: 12px;
+      right: -20px;
+      color: rgba(92,75,153,0.18);
+      font-size: 0.48rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      rotate: 90deg;
+      pointer-events: none;
+    }
+
+    .experience-window .mac-window-body::after {
+      content: '';
+      position: absolute;
+      right: -72px;
+      bottom: 68px;
+      width: 170px;
+      height: 170px;
+      border: 1px solid rgba(143,123,193,0.18);
+      border-radius: 50%;
+      box-shadow: 0 0 0 14px rgba(232,142,160,0.05), 0 0 0 29px rgba(143,123,193,0.05);
+      pointer-events: none;
+    }
+
+    .summer-experience {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 12px;
+      padding: 15px;
+      border-width: 2px;
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.94), rgba(252,225,235,0.86) 58%, rgba(239,234,249,0.86));
+      box-shadow: 0 8px 20px rgba(92,75,153,0.12), 4px 4px 0 rgba(143,123,193,0.12);
+    }
+
+    .summer-experience-header {
+      margin-bottom: 8px;
+      padding-bottom: 9px;
+      border-bottom: 1px solid rgba(92,75,153,0.13);
+    }
+
+    .summer-experience-title {
+      letter-spacing: 0.02em;
+    }
+
+    .experience-orbit-strip {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin: 0 0 10px;
+      padding: 6px 9px;
+      overflow: hidden;
+      border: 1px solid rgba(143,123,193,0.20);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.58);
+      color: #8877aa;
+      font-size: 0.48rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+    }
+
+    .experience-orbit-strip::after {
+      content: '';
+      position: absolute;
+      left: 9px;
+      right: 9px;
+      top: 50%;
+      border-top: 1px dashed rgba(143,123,193,0.25);
+    }
+
+    .experience-orbit-strip span {
+      position: relative;
+      z-index: 1;
+      white-space: nowrap;
+    }
+
+    .experience-orbit-strip .orbit-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #e88ea0;
+      box-shadow: 0 0 0 3px rgba(232,142,160,0.14), 0 0 10px rgba(232,142,160,0.55);
+      animation: experienceDotPulse 2.4s ease-in-out infinite;
+    }
+
+    .experience-orbit-strip .orbit-dot:nth-of-type(3) { background: #b59ddd; animation-delay: -0.6s; }
+    .experience-orbit-strip .orbit-dot:nth-of-type(5) { background: #e6b37d; animation-delay: -1.2s; }
+    .experience-orbit-strip .orbit-dot:nth-of-type(7) { background: #7fb5b0; animation-delay: -1.8s; }
+
+    @keyframes experienceDotPulse {
+      0%, 100% { scale: 0.78; opacity: 0.62; }
+      50% { scale: 1.16; opacity: 1; }
+    }
+
+    .summer-experience-grid {
+      gap: 10px;
+    }
+
+    .summer-card {
+      min-height: 126px;
+      padding: 11px 12px 12px;
+      border-radius: 16px;
+      box-shadow: 0 3px 0 rgba(143,123,193,0.08);
+    }
+
+    .summer-card::after {
+      content: '';
+      position: absolute;
+      right: 11px;
+      bottom: 10px;
+      width: 22px;
+      height: 5px;
+      border-top: 1px solid rgba(92,75,153,0.22);
+      border-right: 1px solid rgba(92,75,153,0.22);
+      rotate: -12deg;
+    }
+
+    .summer-card:nth-child(1) { border-top: 3px solid #e88ea0; }
+    .summer-card:nth-child(2) { border-top: 3px solid #b59ddd; }
+    .summer-card:nth-child(3) { border-top: 3px solid #e6b37d; }
+    .summer-card:nth-child(4) { border-top: 3px solid #7fb5b0; }
+
+    .summer-card-number {
+      width: 22px;
+      height: 22px;
+      margin-bottom: 6px;
+      border-radius: 7px;
+    }
+
+    .summer-card-desc {
+      font-size: 0.69rem;
+      line-height: 1.52;
+    }
+
+    .road-path {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0;
+      padding: 13px 12px 8px 26px;
+      border: 2px solid rgba(92,75,153,0.34);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.55);
+      box-shadow: inset 0 0 18px rgba(143,123,193,0.07);
+    }
+
+    .road-path::before {
+      content: '';
+      position: absolute;
+      left: 13px;
+      top: 18px;
+      bottom: 18px;
+      width: 2px;
+      background: linear-gradient(#e88ea0, #b59ddd, #7fb5b0);
+      opacity: 0.58;
+    }
+
+    .road-path::after {
+      content: 'ONGOING / 02';
+      position: absolute;
+      right: 12px;
+      top: 8px;
+      color: rgba(92,75,153,0.34);
+      font-size: 0.44rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+    }
+
+    .exp-item {
+      position: relative;
+      gap: 10px;
+      margin-bottom: 7px;
+      padding: 9px 8px 9px 10px;
+      border: 1px solid rgba(143,123,193,0.13);
+      background: rgba(255,255,255,0.38);
+    }
+
+    .exp-item:last-child { margin-bottom: 0; }
+
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: -18px;
+      top: 16px;
+      width: 8px;
+      height: 8px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      background: #e88ea0;
+      box-shadow: 0 0 0 3px rgba(232,142,160,0.18);
+    }
+
+    .exp-item:nth-child(2)::before {
+      background: #b59ddd;
+      box-shadow: 0 0 0 3px rgba(181,157,221,0.20);
+    }
+
+    .exp-date {
+      width: 94px;
+      color: #806ca8;
+      font-size: 0.64rem;
+    }
+
+    .exp-title { font-size: 0.84rem; }
+    .exp-desc { font-size: 0.7rem; line-height: 1.45; }
+
+    @media (max-width: 650px) {
+      .summer-experience-header { align-items: flex-start; flex-direction: column; }
+      .summer-experience-tip { text-align: left; }
+      .experience-orbit-strip { overflow-x: auto; justify-content: flex-start; }
+      .summer-card { min-height: 116px; }
+      .road-path { padding-left: 23px; }
+    }
+
+    /* 实践经历开场格言 */
+    .experience-motto {
+      position: relative;
+      z-index: 2;
+      margin: 0 0 14px;
+      padding: 19px 18px 17px;
+      overflow: hidden;
+      border: 1px solid rgba(143,123,193,0.28);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255,255,255,0.98), transparent 42%),
+        linear-gradient(120deg, rgba(255,255,255,0.92), rgba(252,225,235,0.82) 54%, rgba(239,234,249,0.88));
+      box-shadow: 0 6px 0 rgba(143,123,193,0.11), 0 10px 24px rgba(143,123,193,0.10), inset 0 0 22px rgba(255,255,255,0.62);
+      text-align: center;
+    }
+
+    .experience-motto::before,
+    .experience-motto::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 22%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(143,123,193,0.62), rgba(232,142,160,0.48));
+    }
+
+    .experience-motto::before { left: 3%; }
+    .experience-motto::after { right: 3%; transform: rotate(180deg); }
+
+    .motto-cn {
+      position: relative;
+      color: #3d3070;
+      font-family: 'SimSun', 'STSong', 'Songti SC', 'Noto Serif SC', serif;
+      font-size: clamp(1.82rem, 4.8vw, 2.82rem);
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      line-height: 1.16;
+      text-shadow: 0 2px 0 rgba(255,255,255,0.72), 0 0 14px rgba(181,157,221,0.18);
+    }
+
+    .motto-cn::before,
+    .motto-cn::after {
+      content: '✦';
+      display: inline-block;
+      margin: 0 9px;
+      color: #e88ea0;
+      font-size: 0.66em;
+      vertical-align: 0.16em;
+      animation: mottoSpark 2.2s ease-in-out infinite;
+    }
+
+    .motto-cn::after { color: #b59ddd; animation-delay: -1.1s; }
+
+    .motto-en {
+      margin-top: 3px;
+      color: #a86f83;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(0.82rem, 2vw, 1.18rem);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.62);
+    }
+
+    .motto-rule {
+      width: 58px;
+      height: 3px;
+      margin: 10px auto 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #e88ea0, #b59ddd, #7fb5b0);
+      animation: mottoRule 3s ease-in-out infinite;
+    }
+
+    @keyframes mottoSpark { 0%,100%{opacity:.45;scale:.78;rotate:0deg} 50%{opacity:1;scale:1.14;rotate:12deg} }
+    @keyframes mottoRule { 0%,100%{width:42px;opacity:.56} 50%{width:82px;opacity:1} }
+
+    @media (max-width: 650px) {
+      .experience-motto { padding: 16px 10px 14px; }
+      .motto-cn { font-size: 1.66rem; letter-spacing: 0.08em; }
+      .motto-cn::before, .motto-cn::after { margin: 0 5px; }
+      .motto-en { font-size: 0.78rem; letter-spacing: 0.08em; }
+    }
+
   </style>
 </head>
 <body>
@@ -2937,12 +3247,12 @@
               <span class="interest-label">绘画</span>
             </div>
             <div class="interest-item">
-              <div class="interest-icon">📷</div>
-              <span class="interest-label">摄影+Ps</span>
+              <div class="interest-icon">🎙️</div>
+              <span class="interest-label">听播课</span>
             </div>
             <div class="interest-item">
-              <div class="interest-icon">🎬</div>
-              <span class="interest-label">看剧</span>
+              <div class="interest-icon">♀️</div>
+              <span class="interest-label">了解女性知识</span>
             </div>
             <div class="interest-item">
               <div class="interest-icon">📚</div>
@@ -2953,8 +3263,8 @@
               <span class="interest-label">旅游</span>
             </div>
             <div class="interest-item">
-              <div class="interest-icon">📸</div>
-              <span class="interest-label">插画</span>
+              <div class="interest-icon">💬</div>
+              <span class="interest-label">分享好句</span>
             </div>
             <div class="interest-item">
               <div class="interest-icon">📖</div>
@@ -3214,6 +3524,11 @@
           </div>
         </div>
         <div class="mac-window-body">
+          <div class="experience-motto" aria-label="日拱一卒，功不唐捐">
+            <div class="motto-cn">日拱一卒，功不唐捐。</div>
+            <div class="motto-en">Small steps, unwasted effort</div>
+            <div class="motto-rule" aria-hidden="true"></div>
+          </div>
           <div class="go-button">Go!</div>
           
           <section class="summer-experience" aria-label="2026年暑假大学社区经历">
@@ -3223,6 +3538,12 @@
                 <div class="summer-experience-date">2026年暑假 · 大学社区</div>
               </div>
               <div class="summer-experience-tip">点击卡片，点亮经历</div>
+            </div>
+            <div class="experience-orbit-strip" aria-hidden="true">
+              <span class="orbit-dot"></span><span>BUILD</span>
+              <span class="orbit-dot"></span><span>LEARN</span>
+              <span class="orbit-dot"></span><span>SHARE</span>
+              <span class="orbit-dot"></span><span>DELIVER</span>
             </div>
             <div class="summer-experience-grid">
               <div class="summer-card" role="button" tabindex="0" aria-pressed="false">
@@ -3255,13 +3576,6 @@
                 <div class="exp-title">内容运营与视觉主理人</div>
                 <div class="exp-desc">独立运营账号视觉体系，完成图文排版与封面设计，使用Midjourney生成概念图提升内容吸引力</div>
                 <div style="font-size:0.7rem; color:#8877aa; margin-top:3px;">（正在探索中）</div>
-              </div>
-            </div>
-            <div class="exp-item">
-              <div class="exp-date">至目前<br>电商选品模拟实战</div>
-              <div class="exp-content">
-                <div class="exp-title">项目负责人 · 视觉设计</div>
-                <div class="exp-desc">负责视觉呈现与商品主图设计，结合AI生成多组banner，团队协作完成详情页与活动页视觉方案</div>
               </div>
             </div>
             <div class="exp-item">
@@ -3321,20 +3635,20 @@
             </div>
           </div>
           <div class="skills-bars">
+            <div class="skill-bar-item" style="--level:60%;">
+              <div class="skill-label"><span>AI绘画·Prompt</span><span>60%</span></div>
+              <div class="skill-track">
+                <div class="skill-fill"></div>
+              </div>
+            </div>
             <div class="skill-bar-item" style="--level:85%;">
-              <div class="skill-label"><span>AI绘画·Prompt</span><span>85%</span></div>
+              <div class="skill-label"><span>Photoshop 设计</span><span>85%</span></div>
               <div class="skill-track">
                 <div class="skill-fill"></div>
               </div>
             </div>
             <div class="skill-bar-item" style="--level:80%;">
-              <div class="skill-label"><span>Photoshop 设计</span><span>80%</span></div>
-              <div class="skill-track">
-                <div class="skill-fill"></div>
-              </div>
-            </div>
-            <div class="skill-bar-item" style="--level:70%;">
-              <div class="skill-label"><span>电商视觉设计</span><span>70%</span></div>
+              <div class="skill-label"><span>电商视觉设计</span><span>80%</span></div>
               <div class="skill-track">
                 <div class="skill-fill"></div>
               </div>
@@ -3485,7 +3799,7 @@
         </div>
       </div>
     </section>
-
+    
     <!-- 装饰元素 - 放在大窗口边缘空白处 -->
     <div class="deco deco-cursor">➤</div>
     <div class="deco deco-thumbsup">👍</div>
@@ -3685,7 +3999,7 @@
       }, { once: true });
       tryPlayMusic().catch(() => {});
     }
-
+    
     // 关闭按钮效果
     document.querySelectorAll('.close-x').forEach(btn => {
       btn.addEventListener('click', (e) => {
